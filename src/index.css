@@ -1,0 +1,492 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Futuristic Portfolio Design System */
+@layer base {
+  :root {
+    /* Core Background Colors */
+    --background: 240 10% 3.9%;
+    --background-secondary: 240 8% 6%;
+    --background-tertiary: 240 6% 8%;
+    --foreground: 0 0% 98%;
+    
+    /* Glassmorphic Cards */
+    --glass-bg: 240 10% 10%;
+    --glass-border: 240 30% 20%;
+    --glass-shadow: 240 100% 50%;
+    
+    /* Neon Accent Colors */
+    --neon-blue: 217 91% 60%;
+    --neon-purple: 271 81% 56%;
+    --neon-cyan: 187 85% 53%;
+    --neon-pink: 316 73% 52%;
+    
+    /* Gradient Variables */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(271 81% 56%) 100%);
+    --gradient-secondary: linear-gradient(45deg, hsl(187 85% 53%) 0%, hsl(316 73% 52%) 100%);
+    --gradient-dark: linear-gradient(135deg, hsl(240 10% 3.9%) 0%, hsl(240 8% 6%) 100%);
+    
+    /* Glow Effects */
+    --glow-blue: 0 0 20px hsl(217 91% 60% / 0.3);
+    --glow-purple: 0 0 20px hsl(271 81% 56% / 0.3);
+    --glow-cyan: 0 0 20px hsl(187 85% 53% / 0.3);
+    --glow-strong: 0 0 40px hsl(217 91% 60% / 0.5);
+    
+    /* Text Colors */
+    --text-primary: 0 0% 98%;
+    --text-secondary: 240 5% 64%;
+    --text-muted: 240 4% 46%;
+    
+    /* Borders and Inputs */
+    --border: 240 30% 20%;
+    --border-glow: 240 30% 25%;
+    --input-bg: 240 10% 8%;
+    --input-border: 240 30% 18%;
+    
+    /* Animation Variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Spacing */
+    --radius: 12px;
+    --radius-large: 20px;
+    
+    /* Legacy Variables for Compatibility */
+    --card: 240 10% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 240 10% 3.9%;
+    --secondary: 240 30% 20%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 4% 46%;
+    --muted-foreground: 240 5% 64%;
+    --accent: 271 81% 56%;
+    --accent-foreground: 240 10% 3.9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+    background: var(--gradient-dark);
+    overflow-x: hidden;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Glassmorphic Card */
+  .glass-card {
+    background: hsla(var(--glass-bg) / 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsla(var(--glass-border) / 0.2);
+    border-radius: var(--radius-large);
+    box-shadow: var(--glow-blue);
+  }
+  
+  /* Neon Glow Button */
+  .neon-button {
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--radius);
+    padding: 12px 32px;
+    color: white;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+    box-shadow: var(--glow-blue);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .neon-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow-strong);
+  }
+  
+  .neon-button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: var(--transition-smooth);
+  }
+  
+  .neon-button:hover:before {
+    left: 100%;
+  }
+  
+  /* 3D Navigation Animation */
+  .nav-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #222;
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .nav-link {
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: white;
+    transform: translateY(-2px);
+  }
+  
+  .nav-indicator {
+    width: 95px;
+    height: 100%;
+    background: linear-gradient(45deg, #194b4f, #33fffc);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(51, 255, 252, 0.3);
+    transition: all 0.5s ease;
+  }
+  
+  /* Navigation indicator positions for each button */
+  .nav-container .nav-link:nth-child(1):hover ~ .nav-indicator {
+    left: 0px;
+  }
+  
+  .nav-container .nav-link:nth-child(2):hover ~ .nav-indicator {
+    left: 90px;
+  }
+  
+  .nav-container .nav-link:nth-child(3):hover ~ .nav-indicator {
+    left: 180px;
+  }
+  
+  .nav-container .nav-link:nth-child(4):hover ~ .nav-indicator {
+    left: 275px;
+  }
+  
+  .nav-container .nav-link:nth-child(5):hover ~ .nav-indicator {
+    left: 380px;
+  }
+  
+  /* Active state for current page */
+  .nav-container .nav-link.active ~ .nav-indicator {
+    left: 0px;
+  }
+  
+  .nav-container .nav-link:nth-child(1).active ~ .nav-indicator {
+    left: 0px;
+  }
+  
+  .nav-container .nav-link:nth-child(2).active ~ .nav-indicator {
+    left: 90px;
+  }
+  
+  .nav-container .nav-link:nth-child(3).active ~ .nav-indicator {
+    left: 180px;
+  }
+  
+  .nav-container .nav-link:nth-child(4).active ~ .nav-indicator {
+    left: 275px;
+  }
+  
+  .nav-container .nav-link:nth-child(5).active ~ .nav-indicator {
+    left: 380px;
+  }
+  /* Floating Animation */
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  /* Glowing Orb */
+  .glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    opacity: 0.7;
+    animation: glow-pulse 4s ease-in-out infinite alternate;
+  }
+  
+  @keyframes glow-pulse {
+    0% { box-shadow: var(--glow-blue); opacity: 0.5; }
+    100% { box-shadow: var(--glow-strong); opacity: 0.8; }
+  }
+  
+  /* Text Gradient */
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Input Glow */
+  .input-glow {
+    background: hsla(var(--input-bg) / 0.5);
+    border: 1px solid hsla(var(--input-border) / 0.3);
+    backdrop-filter: blur(10px);
+    transition: var(--transition-smooth);
+  }
+  
+  .input-glow:focus {
+    border-color: hsl(var(--neon-blue));
+    box-shadow: 0 0 0 2px hsla(var(--neon-blue) / 0.2);
+    outline: none;
+  }
+  
+  /* Loading Progress Bar */
+  .progress-bar {
+    background: var(--gradient-primary);
+    height: 4px;
+    border-radius: 2px;
+    box-shadow: var(--glow-blue);
+  }
+  
+  /* Preloader */
+  .preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-dark);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  /* Minimalistic Button */
+  .minimal-button {
+    background: transparent;
+    border: 1px solid hsla(var(--glass-border) / 0.3);
+    border-radius: var(--radius);
+    padding: 10px 24px;
+    color: hsl(var(--text-primary));
+    font-weight: 500;
+    font-size: 14px;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+  
+  .minimal-button:hover {
+    border-color: hsl(var(--neon-blue));
+    color: hsl(var(--neon-blue));
+    box-shadow: 0 0 20px hsla(var(--neon-blue) / 0.2);
+    transform: translateY(-1px);
+  }
+  
+  .minimal-button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsla(var(--neon-blue) / 0.1), transparent);
+    transition: var(--transition-smooth);
+  }
+  
+  .minimal-button:hover:before {
+    left: 100%;
+  }
+  
+  /* Navigation Link Animation */
+  .nav-link {
+    position: relative;
+  }
+  
+  .nav-link:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+  }
+  
+  .nav-link:hover:after {
+    transform: scaleX(1);
+  }
+
+  /* Theme Toggle Button */
+  .theme-toggle-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-toggle-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
+
+  .theme-toggle-btn:hover::before {
+    left: 100%;
+  }
+
+  .theme-toggle-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Theme Toggle Icon Animation */
+  .theme-toggle-btn svg {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-toggle-btn:hover svg {
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+
+  /* Light Mode Styles */
+  .light-mode {
+    --background: 0 0% 98%;
+    --background-secondary: 0 0% 96%;
+    --background-tertiary: 0 0% 94%;
+    --foreground: 240 10% 3.9%;
+    --text-primary: 240 10% 3.9%;
+    --text-secondary: 240 5% 46%;
+    --text-muted: 240 4% 64%;
+    --glass-bg: 0 0% 96%;
+    --glass-border: 240 30% 80%;
+  }
+
+  /* 3D Certificate Card Animations */
+  .certification-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .certification-card:hover {
+    transform: translateZ(20px) rotateX(5deg) rotateY(5deg);
+  }
+
+  .rotate-y-12 {
+    transform: rotateY(12deg);
+  }
+
+  .translate-z-4 {
+    transform: translateZ(4px);
+  }
+
+  .translate-z-2 {
+    transform: translateZ(2px);
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  /* 3D Floating Elements Animation */
+  @keyframes float-3d {
+    0%, 100% {
+      transform: translateZ(0px) translateY(0px);
+    }
+    50% {
+      transform: translateZ(10px) translateY(-5px);
+    }
+  }
+
+  .certification-card:hover .absolute {
+    animation: float-3d 2s ease-in-out infinite;
+  }
+
+  /* Enhanced Glow Effects */
+  .certification-card:hover {
+    box-shadow: 
+      0 0 20px rgba(147, 51, 234, 0.3),
+      0 0 40px rgba(147, 51, 234, 0.1),
+      0 0 60px rgba(147, 51, 234, 0.05);
+  }
+
+  /* 3D Text Effects */
+  .certification-card h3 {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .certification-card:hover h3 {
+    text-shadow: 0 4px 8px rgba(147, 51, 234, 0.4);
+  }
+
+  /* Certificate Image 3D Effect */
+  .certification-card img {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .certification-card:hover img {
+    transform: scale(1.05) translateZ(10px);
+    filter: brightness(1.1) contrast(1.1);
+  }
+
+  /* Medal Icon 3D Rotation */
+  .certification-card .glass-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .certification-card:hover .glass-card {
+    transform: rotateY(15deg) scale(1.1);
+  }
+
+  /* Status Tags 3D Pop Effect */
+  .certification-card span {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .certification-card:hover span {
+    transform: translateZ(5px) scale(1.05);
+  }
+
+  /* LinkedIn Button 3D Lift */
+  .certification-card a {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .certification-card:hover a {
+    transform: translateY(-2px) translateZ(5px);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
