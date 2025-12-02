@@ -32,14 +32,17 @@ const CertificateCard = ({ certificate, onDelete }: CertificateCardProps) => {
       {/* Certificate Image with 3D Effect */}
       <div className="relative mb-4 transform-gpu transition-transform duration-500 group-hover:rotate-y-12 group-hover:scale-105">
         {!imageError ? (
-          <img 
-            src={imageUrl} 
-            alt={certificate.name}
-            className="w-full h-48 object-cover rounded-lg transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-neon-purple/30"
-            onError={handleImageError}
-          />
+          <div className="w-full min-h-[300px] bg-gradient-to-br from-background-secondary/50 to-background-tertiary/50 rounded-lg p-4 border border-glass-border/30 flex items-center justify-center">
+            <img 
+              src={imageUrl} 
+              alt={certificate.name}
+              className="w-full h-auto max-h-[300px] object-contain rounded-lg transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-neon-purple/30"
+              onError={handleImageError}
+              loading="lazy"
+            />
+          </div>
         ) : (
-          <div className="w-full h-48 bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 rounded-lg flex items-center justify-center border-2 border-dashed border-neon-blue/30">
+          <div className="w-full min-h-[300px] bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 rounded-lg flex items-center justify-center border-2 border-dashed border-neon-blue/30">
             <div className="text-center">
               <Medal size={48} className="text-neon-purple mx-auto mb-2" />
               <p className="text-text-secondary text-sm">Certificate Image</p>
@@ -47,7 +50,7 @@ const CertificateCard = ({ certificate, onDelete }: CertificateCardProps) => {
             </div>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg pointer-events-none"></div>
         
         {/* 3D Floating Elements */}
         <div className="absolute -top-2 -right-2 w-4 h-4 bg-neon-purple/20 rounded-full animate-pulse group-hover:animate-bounce"></div>
