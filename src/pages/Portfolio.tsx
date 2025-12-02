@@ -133,18 +133,18 @@ const Portfolio = () => {
             
             {/* Content with higher z-index */}
             <div className="relative z-10">
-            <h1 className="hero-title text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white">
-              <span className="hero-intro-label">Hi, I'm</span>
-              <span className="hero-name-pan">Rokibul Islam Robi</span>
-              <span className="hero-role-lockup">
-                <span className="hero-role-base">Software</span>{' '}
+            <h1 className="hero-title text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
+              {/* Section 1: Hi, I'm + Name */}
+              <div className="hero-section-1">
+                <span className="hero-intro-label">Hi, I'm</span>
+                <span className="hero-name-pan">Rokibul Islam Robi</span>
+              </div>
+              {/* Section 2: Software Engineer */}
+              <div className="hero-section-2">
+                <span className="hero-role-base">Software</span>
                 <span className="hero-role-accent">Engineer</span>
-              </span>
+              </div>
             </h1>
-            
-            <p className="hero-subtitle text-white text-lg md:text-xl mb-8 max-w-2xl">
-              Data Analyst | SQL | Java & Spring Boot | Flutter | Power BI Tech Enthusiastic
-            </p>
             
             <div className="hero-cta flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <button className="neon-button group">
