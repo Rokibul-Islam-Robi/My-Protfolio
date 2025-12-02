@@ -41,10 +41,12 @@ const Portfolio = () => {
   // Typing animation states
   const [displayedText1, setDisplayedText1] = useState('');
   const [displayedText2, setDisplayedText2] = useState('');
+  const [displayedText3, setDisplayedText3] = useState('');
   const [isTyping, setIsTyping] = useState(true);
   
-  const fullText1 = "Hi, I'm Rokibul Islam Robi";
-  const fullText2 = "Software Engineer";
+  const fullText1 = "Hi, I'm";
+  const fullText2 = "Rokibul Islam Robi";
+  const fullText3 = "A Passionate Software Engineer";
 
   useEffect(() => {
     const storedCertificates = localStorage.getItem('certificates');
@@ -97,9 +99,10 @@ const Portfolio = () => {
   useEffect(() => {
     let currentIndex1 = 0;
     let currentIndex2 = 0;
+    let currentIndex3 = 0;
     let timeoutId: NodeJS.Timeout;
-    let pauseTimeoutId: NodeJS.Timeout;
-    let isPaused = false;
+    let pauseTimeoutId1: NodeJS.Timeout;
+    let pauseTimeoutId2: NodeJS.Timeout;
 
     const typeText1 = () => {
       if (currentIndex1 < fullText1.length) {
@@ -108,9 +111,7 @@ const Portfolio = () => {
         timeoutId = setTimeout(typeText1, 50); // Typing speed
       } else {
         // Pause for 1000ms after first text
-        isPaused = true;
-        pauseTimeoutId = setTimeout(() => {
-          isPaused = false;
+        pauseTimeoutId1 = setTimeout(() => {
           typeText2();
         }, 1000);
       }
@@ -121,6 +122,19 @@ const Portfolio = () => {
         setDisplayedText2(fullText2.slice(0, currentIndex2 + 1));
         currentIndex2++;
         timeoutId = setTimeout(typeText2, 50); // Typing speed
+      } else {
+        // Pause for 1000ms after second text
+        pauseTimeoutId2 = setTimeout(() => {
+          typeText3();
+        }, 1000);
+      }
+    };
+
+    const typeText3 = () => {
+      if (currentIndex3 < fullText3.length) {
+        setDisplayedText3(fullText3.slice(0, currentIndex3 + 1));
+        currentIndex3++;
+        timeoutId = setTimeout(typeText3, 50); // Typing speed
       } else {
         setIsTyping(false);
       }
@@ -133,7 +147,8 @@ const Portfolio = () => {
 
     return () => {
       clearTimeout(timeoutId);
-      clearTimeout(pauseTimeoutId);
+      clearTimeout(pauseTimeoutId1);
+      clearTimeout(pauseTimeoutId2);
       clearTimeout(startDelay);
     };
   }, []);
@@ -186,29 +201,43 @@ const Portfolio = () => {
             
             {/* Content with higher z-index */}
             <div className="relative z-10">
-            <h1 className="hero-title-typing text-3xl md:text-4xl lg:text-5xl font-bold mb-8 leading-tight">
-              {/* Typing Animation Text */}
-              <div className="typing-container">
-                <span className="typing-text">
+            <div className="hero-typing-wrapper">
+              {/* Section 1: Hi, I'm */}
+              <div className="hero-section-top">
+                <span className="typing-text typing-section-1">
                   {displayedText1}
                   {(isTyping && displayedText1.length < fullText1.length) || 
                    (displayedText1.length === fullText1.length && displayedText2.length === 0) ? (
                     <span className="typing-cursor">|</span>
                   ) : null}
                 </span>
-                {displayedText1.length === fullText1.length && (
-                  <>
-                    <br />
-                    <span className="typing-text">
-                      {displayedText2}
-                      {isTyping && displayedText2.length < fullText2.length && (
-                        <span className="typing-cursor">|</span>
-                      )}
-                    </span>
-                  </>
-                )}
               </div>
-            </h1>
+              
+              {/* Section 2: Rokibul Islam Robi (White/Glass) */}
+              {displayedText1.length === fullText1.length && (
+                <div className="hero-section-middle">
+                  <span className="typing-text typing-section-2">
+                    {displayedText2}
+                    {(isTyping && displayedText2.length < fullText2.length) || 
+                     (displayedText2.length === fullText2.length && displayedText3.length === 0) ? (
+                      <span className="typing-cursor">|</span>
+                    ) : null}
+                  </span>
+                </div>
+              )}
+              
+              {/* Section 3: A Passionate Software Engineer */}
+              {displayedText2.length === fullText2.length && (
+                <div className="hero-section-bottom">
+                  <span className="typing-text typing-section-3">
+                    {displayedText3}
+                    {isTyping && displayedText3.length < fullText3.length && (
+                      <span className="typing-cursor">|</span>
+                    )}
+                  </span>
+                </div>
+              )}
+            </div>
             
             <div className="hero-cta flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <button className="neon-button group">
