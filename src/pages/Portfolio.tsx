@@ -37,6 +37,14 @@ const Portfolio = () => {
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [isProjectManagerOpen, setIsProjectManagerOpen] = useState(false);
+  
+  // Typing animation states
+  const [displayedText1, setDisplayedText1] = useState('');
+  const [displayedText2, setDisplayedText2] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  
+  const fullText1 = "Hi, I'm Rokibul Islam Robi";
+  const fullText2 = "Software Engineer";
 
   useEffect(() => {
     const storedCertificates = localStorage.getItem('certificates');
@@ -83,6 +91,51 @@ const Portfolio = () => {
     }, containerRef);
 
     return () => ctx.revert();
+  }, []);
+
+  // Typing animation effect
+  useEffect(() => {
+    let currentIndex1 = 0;
+    let currentIndex2 = 0;
+    let timeoutId: NodeJS.Timeout;
+    let pauseTimeoutId: NodeJS.Timeout;
+    let isPaused = false;
+
+    const typeText1 = () => {
+      if (currentIndex1 < fullText1.length) {
+        setDisplayedText1(fullText1.slice(0, currentIndex1 + 1));
+        currentIndex1++;
+        timeoutId = setTimeout(typeText1, 50); // Typing speed
+      } else {
+        // Pause for 1000ms after first text
+        isPaused = true;
+        pauseTimeoutId = setTimeout(() => {
+          isPaused = false;
+          typeText2();
+        }, 1000);
+      }
+    };
+
+    const typeText2 = () => {
+      if (currentIndex2 < fullText2.length) {
+        setDisplayedText2(fullText2.slice(0, currentIndex2 + 1));
+        currentIndex2++;
+        timeoutId = setTimeout(typeText2, 50); // Typing speed
+      } else {
+        setIsTyping(false);
+      }
+    };
+
+    // Start typing after a short delay
+    const startDelay = setTimeout(() => {
+      typeText1();
+    }, 500);
+
+    return () => {
+      clearTimeout(timeoutId);
+      clearTimeout(pauseTimeoutId);
+      clearTimeout(startDelay);
+    };
   }, []);
 
   const skills = [
@@ -133,16 +186,27 @@ const Portfolio = () => {
             
             {/* Content with higher z-index */}
             <div className="relative z-10">
-            <h1 className="hero-title text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
-              {/* Section 1: Hi, I'm + Name */}
-              <div className="hero-section-1">
-                <span className="hero-intro-label">Hi, I'm</span>
-                <span className="hero-name-pan">Rokibul Islam Robi</span>
-              </div>
-              {/* Section 2: Software Engineer */}
-              <div className="hero-section-2">
-                <span className="hero-role-base">Software</span>
-                <span className="hero-role-accent">Engineer</span>
+            <h1 className="hero-title-typing text-3xl md:text-4xl lg:text-5xl font-bold mb-8 leading-tight">
+              {/* Typing Animation Text */}
+              <div className="typing-container">
+                <span className="typing-text">
+                  {displayedText1}
+                  {(isTyping && displayedText1.length < fullText1.length) || 
+                   (displayedText1.length === fullText1.length && displayedText2.length === 0) ? (
+                    <span className="typing-cursor">|</span>
+                  ) : null}
+                </span>
+                {displayedText1.length === fullText1.length && (
+                  <>
+                    <br />
+                    <span className="typing-text">
+                      {displayedText2}
+                      {isTyping && displayedText2.length < fullText2.length && (
+                        <span className="typing-cursor">|</span>
+                      )}
+                    </span>
+                  </>
+                )}
               </div>
             </h1>
             
