@@ -239,7 +239,7 @@ const Portfolio = () => {
               )}
             </div>
             
-            <div className="hero-cta flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <div className="hero-cta flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-12">
               <button className="neon-button group">
                 Hire Me
                 <ArrowRight size={20} className="ml-2 inline transition-transform group-hover:translate-x-1" />

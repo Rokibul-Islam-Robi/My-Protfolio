@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { List, X, Sun, Moon } from 'phosphor-react';
+import { List, X, Sun, Moon, DownloadSimple } from 'phosphor-react';
 import { Link, useLocation } from 'react-router-dom';
+import { cvLinks } from '../data/cv';
+import CVPreview from './CVPreview';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -74,21 +76,35 @@ const Navigation = () => {
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-4">
-              <div className="nav-container relative">
+            <div className="hidden lg:flex items-center gap-6">
+              <div className="nav-container relative bg-background-secondary/90 backdrop-blur-sm rounded-full px-2 py-2 flex items-center">
                 {navItems.map((item, index) => (
                   <Link
                     key={item.name}
                     to={item.path}
-                    className={`nav-link relative inline-block text-text-secondary hover:text-text-primary transition-all duration-500 ease-out py-1 px-4 mx-1 hover:scale-105 hover:shadow-lg hover:shadow-neon-blue/20 ${
-                      location.pathname === item.path ? 'text-white scale-105 shadow-lg shadow-neon-blue/20' : ''
+                    className={`nav-link relative inline-block transition-all duration-300 ease-out py-2 px-5 mx-1 uppercase text-sm font-medium ${
+                      location.pathname === item.path 
+                        ? 'text-[#ff4d3d]' 
+                        : 'text-white hover:text-[#ff4d3d]/80'
                     }`}
-                    
                   >
                     {item.name}
                   </Link>
                 ))}
               </div>
+
+              {/* Download CV Button */}
+              <CVPreview type="cv">
+                <a 
+                  href={cvLinks.cv}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-2 rounded-lg border-2 border-[#ff4d3d] text-white uppercase text-sm font-medium hover:bg-[#ff4d3d]/10 transition-all duration-300 flex items-center gap-2"
+                >
+                  <DownloadSimple size={18} />
+                  Download CV
+                </a>
+              </CVPreview>
 
               {/* Theme Toggle Button */}
               <button
