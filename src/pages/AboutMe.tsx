@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from '../components/Navigation';
@@ -20,20 +20,77 @@ gsap.registerPlugin(ScrollTrigger);
 
 const AboutMe = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Typing animation states
+  const [displayedText1, setDisplayedText1] = useState('');
+  const [displayedText2, setDisplayedText2] = useState('');
+  const [displayedText3, setDisplayedText3] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  
+  const fullText1 = "Hi, I'm";
+  const fullText2 = "Rokibul Islam Robi";
+  const fullText3 = "A passionate software engineer with a love for creating innovative solutions and pushing the boundaries of technology.";
+
+  // Typing animation effect
+  useEffect(() => {
+    let currentIndex1 = 0;
+    let currentIndex2 = 0;
+    let currentIndex3 = 0;
+    let timeoutId: NodeJS.Timeout;
+    let pauseTimeoutId1: NodeJS.Timeout;
+    let pauseTimeoutId2: NodeJS.Timeout;
+
+    const typeText1 = () => {
+      if (currentIndex1 < fullText1.length) {
+        setDisplayedText1(fullText1.slice(0, currentIndex1 + 1));
+        currentIndex1++;
+        timeoutId = setTimeout(typeText1, 50); // Typing speed
+      } else {
+        // Pause for 1000ms after first text
+        pauseTimeoutId1 = setTimeout(() => {
+          typeText2();
+        }, 1000);
+      }
+    };
+
+    const typeText2 = () => {
+      if (currentIndex2 < fullText2.length) {
+        setDisplayedText2(fullText2.slice(0, currentIndex2 + 1));
+        currentIndex2++;
+        timeoutId = setTimeout(typeText2, 50); // Typing speed
+      } else {
+        // Pause for 1000ms after second text
+        pauseTimeoutId2 = setTimeout(() => {
+          typeText3();
+        }, 1000);
+      }
+    };
+
+    const typeText3 = () => {
+      if (currentIndex3 < fullText3.length) {
+        setDisplayedText3(fullText3.slice(0, currentIndex3 + 1));
+        currentIndex3++;
+        timeoutId = setTimeout(typeText3, 50); // Typing speed
+      } else {
+        setIsTyping(false);
+      }
+    };
+
+    // Start typing after a short delay
+    const startDelay = setTimeout(() => {
+      typeText1();
+    }, 500);
+
+    return () => {
+      clearTimeout(timeoutId);
+      clearTimeout(pauseTimeoutId1);
+      clearTimeout(pauseTimeoutId2);
+      clearTimeout(startDelay);
+    };
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero section animations
-      gsap.fromTo('.about-hero-title', 
-        { opacity: 0, y: 60, filter: 'blur(10px)' },
-        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, ease: 'power3.out', delay: 0.3 }
-      );
-
-      gsap.fromTo('.about-hero-subtitle', 
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.6 }
-      );
-
       gsap.fromTo('.about-image', 
         { opacity: 0, x: -60, filter: 'blur(5px)' },
         { opacity: 1, x: 0, filter: 'blur(0px)', duration: 1, ease: 'power3.out', delay: 0.8 }
@@ -143,12 +200,34 @@ const AboutMe = () => {
                 </span>
               </div>
               
-              <h1 className="about-hero-title text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight" style={{ background: 'linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(271 81% 56%) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                Hi, I'm Rokibul Islam Robi
-              </h1>
+              <div className="hero-typing-wrapper mb-6">
+                {/* Section 1: Hi, I'm */}
+                <div className="hero-section-top">
+                  <span className="typing-text typing-section-1">
+                    {displayedText1}
+                  </span>
+                </div>
+                
+                {/* Section 2: Rokibul Islam Robi (White/Glass) */}
+                {displayedText1.length === fullText1.length && (
+                  <div className="hero-section-middle">
+                    <span className="typing-text typing-section-2">
+                      {displayedText2}
+                    </span>
+                  </div>
+                )}
+                
+                {/* Section 3: A Passionate Software Engineer */}
+                {displayedText2.length === fullText2.length && (
+                  <div className="hero-section-bottom">
+                    <span className="typing-text typing-section-3">
+                      {displayedText3}
+                    </span>
+                  </div>
+                )}
+              </div>
               
-              <p className="about-hero-subtitle text-white text-lg md:text-xl mb-8 max-w-2xl">
-                A passionate software engineer with a love for creating innovative solutions and pushing the boundaries of technology. 
+              <p className="text-white text-lg md:text-xl mb-8 max-w-2xl">
                 I believe in writing clean, efficient code and building products that make a difference.
               </p>
               

@@ -206,10 +206,6 @@ const Portfolio = () => {
               <div className="hero-section-top">
                 <span className="typing-text typing-section-1">
                   {displayedText1}
-                  {(isTyping && displayedText1.length < fullText1.length) || 
-                   (displayedText1.length === fullText1.length && displayedText2.length === 0) ? (
-                    <span className="typing-cursor">|</span>
-                  ) : null}
                 </span>
               </div>
               
@@ -218,10 +214,6 @@ const Portfolio = () => {
                 <div className="hero-section-middle">
                   <span className="typing-text typing-section-2">
                     {displayedText2}
-                    {(isTyping && displayedText2.length < fullText2.length) || 
-                     (displayedText2.length === fullText2.length && displayedText3.length === 0) ? (
-                      <span className="typing-cursor">|</span>
-                    ) : null}
                   </span>
                 </div>
               )}
@@ -231,9 +223,6 @@ const Portfolio = () => {
                 <div className="hero-section-bottom">
                   <span className="typing-text typing-section-3">
                     {displayedText3}
-                    {isTyping && displayedText3.length < fullText3.length && (
-                      <span className="typing-cursor">|</span>
-                    )}
                   </span>
                 </div>
               )}
@@ -442,29 +431,6 @@ const Portfolio = () => {
                   <div className="space-y-6">
                     <h4 className="text-lg font-semibold text-text-primary mb-4">Quick Actions</h4>
                     <div className="space-y-3">
-                      <CVPreview type="cv">
-                        <a 
-                          href={cvLinks.cv}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full glass-card p-4 text-left hover:border-neon-blue/50 transition-all duration-300 border border-glass-border/30 rounded-lg group"
-                        >
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-3">
-                              <div className="p-2 rounded-lg bg-neon-blue/10">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-neon-blue">
-                                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                </svg>
-                              </div>
-                              <span className="text-text-primary font-medium">Download CV</span>
-                            </div>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-text-secondary group-hover:text-neon-blue transition-colors">
-                              <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 19l8-8-8-8z"/>
-                            </svg>
-                          </div>
-                        </a>
-                      </CVPreview>
-                      
                       <button className="w-full glass-card p-4 text-left hover:border-neon-purple/50 transition-all duration-300 border border-glass-border/30 rounded-lg group">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">

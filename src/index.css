@@ -296,25 +296,7 @@
   }
 
   .typing-cursor {
-    display: inline-block;
-    color: #36BCF7;
-    font-weight: 700;
-    margin-left: 4px;
-    animation: blink-cursor 1s infinite;
-    vertical-align: baseline;
-  }
-
-  .typing-section-2 .typing-cursor {
-    color: #ffffff;
-  }
-
-  @keyframes blink-cursor {
-    0%, 50% {
-      opacity: 1;
-    }
-    51%, 100% {
-      opacity: 0;
-    }
+    display: none;
   }
   
   /* Input Glow */
