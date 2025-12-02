@@ -249,63 +249,63 @@
   .hero-typing-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0.5rem;
     font-family: 'Fira Code', monospace;
     font-weight: 700;
-    line-height: 1.6;
+    line-height: 1.3;
   }
 
   .hero-section-top {
     display: block;
+    margin-bottom: 0.25rem;
   }
 
   .hero-section-middle {
     display: block;
+    margin: 0.25rem 0;
   }
 
   .hero-section-bottom {
     display: block;
+    margin-top: 0.25rem;
   }
 
   .typing-text {
     font-family: 'Fira Code', monospace;
     font-weight: 700;
     letter-spacing: 0.02em;
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
   }
 
   .typing-section-1 {
     color: #36BCF7;
-    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-size: clamp(1rem, 2.5vw, 1.375rem);
+    line-height: 1.4;
   }
 
   .typing-section-2 {
     color: #ffffff;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5),
-                 0 0 60px rgba(255, 255, 255, 0.3),
-                 0 4px 20px rgba(0, 0, 0, 0.6),
-                 0 0 100px rgba(255, 255, 255, 0.2);
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 1.2;
+    font-weight: 700;
   }
 
   .typing-section-3 {
     color: #36BCF7;
-    font-size: clamp(1.25rem, 2.5vw, 2rem);
+    font-size: clamp(1.125rem, 2.5vw, 1.75rem);
+    line-height: 1.4;
   }
 
   .typing-cursor {
     display: inline-block;
     color: #36BCF7;
     font-weight: 700;
-    margin-left: 3px;
+    margin-left: 4px;
     animation: blink-cursor 1s infinite;
     vertical-align: baseline;
   }
 
   .typing-section-2 .typing-cursor {
     color: #ffffff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   }
 
   @keyframes blink-cursor {
