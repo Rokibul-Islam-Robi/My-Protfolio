@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Plus, X, Upload } from 'phosphor-react';
 import { Project } from '../data/projects';
 
 interface ProjectManagerProps {
   onAddProject: (project: Omit<Project, 'id'>) => void;
+  onUpdateProject?: (project: Project) => void;
   isOpen: boolean;
   onClose: () => void;
+  editingProject?: Project | null;
 }
 
-const ProjectManager = ({ onAddProject, isOpen, onClose }: ProjectManagerProps) => {
+const ProjectManager = ({ onAddProject, onUpdateProject, isOpen, onClose, editingProject }: ProjectManagerProps) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -23,6 +25,38 @@ const ProjectManager = ({ onAddProject, isOpen, onClose }: ProjectManagerProps) 
     }
   });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  // Update form when editingProject changes
+  useEffect(() => {
+    if (editingProject) {
+      setFormData({
+        title: editingProject.title,
+        description: editingProject.description,
+        tech: editingProject.tech.join(', '),
+        image: editingProject.image,
+        githubUrl: editingProject.githubUrl,
+        liveUrl: editingProject.liveUrl || '',
+        stats: editingProject.stats,
+      });
+      setSelectedFile(null);
+    } else if (isOpen && !editingProject) {
+      // Reset form when opening for new project
+      setFormData({
+        title: '',
+        description: '',
+        tech: '',
+        image: '',
+        githubUrl: '',
+        liveUrl: '',
+        stats: {
+          stars: 0,
+          forks: 0,
+          views: 0,
+        }
+      });
+      setSelectedFile(null);
+    }
+  }, [editingProject, isOpen]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -58,22 +92,30 @@ const ProjectManager = ({ onAddProject, isOpen, onClose }: ProjectManagerProps) 
           imageUrl = result.data.url;
         }
 
-        const newProject = {
+        const projectData = {
           ...formData,
           tech: formData.tech.split(',').map(t => t.trim()),
           image: imageUrl,
         };
 
-        onAddProject(newProject);
+        if (editingProject && onUpdateProject) {
+          onUpdateProject({ ...projectData, id: editingProject.id });
+        } else {
+          onAddProject(projectData);
+        }
         resetForm();
       };
     } else {
-      const newProject = {
+      const projectData = {
         ...formData,
         tech: formData.tech.split(',').map(t => t.trim()),
       };
   
-      onAddProject(newProject);
+      if (editingProject && onUpdateProject) {
+        onUpdateProject({ ...projectData, id: editingProject.id });
+      } else {
+        onAddProject(projectData);
+      }
       resetForm();
     }
   };
@@ -93,7 +135,6 @@ const ProjectManager = ({ onAddProject, isOpen, onClose }: ProjectManagerProps) 
       }
     });
     setSelectedFile(null);
-    onClose();
   }
 
   const handleInputChange = (field: string, value: string | number) => {
@@ -121,10 +162,13 @@ const ProjectManager = ({ onAddProject, isOpen, onClose }: ProjectManagerProps) 
       <div className="glass-card p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-text-primary">
-            Add New Project
+            {editingProject ? 'Edit Project' : 'Add New Project'}
           </h2>
           <button
-            onClick={onClose}
+            onClick={() => {
+              resetForm();
+              onClose();
+            }}
             className="p-2 text-text-secondary hover:text-text-primary transition-colors"
           >
             <X size={24} />
@@ -263,11 +307,14 @@ const ProjectManager = ({ onAddProject, isOpen, onClose }: ProjectManagerProps) 
               className="neon-button flex-1 flex items-center justify-center gap-2"
             >
               <Plus size={20} />
-              Add Project
+              {editingProject ? 'Update Project' : 'Add Project'}
             </button>
             <button
               type="button"
-              onClick={onClose}
+              onClick={() => {
+                resetForm();
+                onClose();
+              }}
               className="glass-card px-6 py-3 border border-glass-border/30 text-text-primary hover:border-neon-blue/50 transition-all duration-300"
             >
               Cancel
