@@ -630,29 +630,35 @@ const Portfolio = () => {
               </p>
               
               <div className="space-y-6">
-                <ContactCard
-                  icon={EnvelopeSimple}
-                  title="Email"
-                  content="rokebul.islam088@gmail.com"
-                  href="mailto:rokebul.islam088@gmail.com"
-                  color="blue"
-                />
+                <div className="w-full h-[120px]">
+                  <ContactCard
+                    icon={EnvelopeSimple}
+                    title="Email"
+                    content="rokebul.islam088@gmail.com"
+                    href="mailto:rokebul.islam088@gmail.com"
+                    color="blue"
+                  />
+                </div>
                 
-                <ContactCard
-                  icon={GithubLogo}
-                  title="GitHub"
-                  content="github.com/Rokibul-Islam-Robi"
-                  href="https://github.com/Rokibul-Islam-Robi"
-                  color="purple"
-                />
+                <div className="w-full h-[120px]">
+                  <ContactCard
+                    icon={GithubLogo}
+                    title="GitHub"
+                    content="github.com/Rokibul-Islam-Robi"
+                    href="https://github.com/Rokibul-Islam-Robi"
+                    color="purple"
+                  />
+                </div>
                 
-                <ContactCard
-                  icon={LinkedinLogo}
-                  title="LinkedIn"
-                  content="linkedin.com/in/rokibulislam088"
-                  href="https://www.linkedin.com/in/rokibulislam088"
-                  color="cyan"
-                />
+                <div className="w-full h-[120px]">
+                  <ContactCard
+                    icon={LinkedinLogo}
+                    title="LinkedIn"
+                    content="linkedin.com/in/rokibulislam088"
+                    href="https://www.linkedin.com/in/rokibulislam088"
+                    color="cyan"
+                  />
+                </div>
               </div>
             </div>
             

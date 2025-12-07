@@ -37,16 +37,16 @@ const ContactCard = ({ icon: Icon, title, content, href, color }: ContactCardPro
   const cardId = `contact-card-${title.toLowerCase().replace(/\s+/g, '-')}`;
 
   const cardContent = (
-    <div className="project-card-3d-container h-full min-h-[100px]" style={{ userSelect: 'none' }}>
-      <div className="project-card-3d-canvas h-full">
+    <div className="project-card-3d-container h-full min-h-[120px]" style={{ userSelect: 'none', width: '100%' }}>
+      <div className="project-card-3d-canvas h-full" style={{ width: '100%' }}>
         {/* 3D Tracking Grid */}
         {Array.from({ length: 25 }).map((_, i) => (
           <div key={i} className="project-card-3d-tracker" />
         ))}
 
         {/* 3D Card */}
-        <div id={cardId} className="project-card-3d-card h-full">
-          <div className={`project-card-3d-content glass-card p-6 ${colors.glow} transition-all duration-500 group h-full flex items-center gap-4 ${colors.border} border ${colors.bg}`}>
+        <div id={cardId} className="project-card-3d-card h-full" style={{ width: '100%' }}>
+          <div className={`project-card-3d-content glass-card p-6 ${colors.glow} transition-all duration-500 group h-full flex items-center gap-4 ${colors.border} border ${colors.bg} w-full`}>
             {/* Cyber Effects */}
             <div className="project-card-cyber-lines">
               <span></span>
@@ -102,14 +102,15 @@ const ContactCard = ({ icon: Icon, title, content, href, color }: ContactCardPro
         href={href}
         target={href.startsWith('mailto:') ? '_self' : '_blank'}
         rel={href.startsWith('mailto:') ? '' : 'noopener noreferrer'}
-        className="block h-full"
+        className="block h-full w-full"
+        style={{ display: 'block', height: '100%', width: '100%' }}
       >
         {cardContent}
       </a>
     );
   }
 
-  return <div className="h-full">{cardContent}</div>;
+  return <div className="h-full w-full" style={{ display: 'block', height: '100%', width: '100%' }}>{cardContent}</div>;
 };
 
 export default ContactCard;
