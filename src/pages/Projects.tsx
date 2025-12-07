@@ -69,8 +69,16 @@ const Projects = () => {
     return () => ctx.revert();
   }, []);
 
+  // Get projects from data file - these should always be available
   const featuredProjects = getFeaturedProjects();
   const allProjects = getAllProjects();
+  
+  // Debug: Log if projects are empty (only in development)
+  if (process.env.NODE_ENV === 'development') {
+    if (featuredProjects.length === 0 || allProjects.length === 0) {
+      console.warn('No projects found in data file!');
+    }
+  }
 
   return (
     <div ref={containerRef} className="relative min-h-screen">

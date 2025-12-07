@@ -32,7 +32,8 @@ const Portfolio = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const [certificates, setCertificates] = useState<Certificate[]>([]);
-  const [projects, setProjects] = useState<Project[]>([]);
+  // Initialize with initialProjects to ensure they display immediately
+  const [projects, setProjects] = useState<Project[]>(initialProjects);
   const [isProjectManagerOpen, setIsProjectManagerOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   
@@ -67,47 +68,50 @@ const Portfolio = () => {
       localStorage.setItem('certificates', JSON.stringify(initialCertificates));
     }
 
-    // Load projects with migration logic
+    // Load projects - always start with initial projects, then check localStorage
+    // This ensures projects always display on first visit
     const storedProjects = localStorage.getItem('projects');
     const projectsVersion = localStorage.getItem('projects_version');
-    const currentVersion = '2.0'; // Version to track project data structure updates
+    const currentVersion = '2.1'; // Increment version to force refresh
     
-    // If version doesn't match or no version, update projects
-    if (projectsVersion !== currentVersion) {
-      setProjects(initialProjects);
-      localStorage.setItem('projects', JSON.stringify(initialProjects));
-      localStorage.setItem('projects_version', currentVersion);
-    } else if (storedProjects) {
+    // Always set initial projects first to ensure they display
+    setProjects(initialProjects);
+    
+    // Then check if we should use localStorage data
+    if (storedProjects && projectsVersion === currentVersion) {
       try {
         const parsed = JSON.parse(storedProjects);
-        if (Array.isArray(parsed)) {
+        if (Array.isArray(parsed) && parsed.length > 0) {
           // Validate project structure
           const isValid = parsed.every(p => 
             p && 
             typeof p.id === 'number' && 
             typeof p.title === 'string' && 
-            typeof p.githubUrl === 'string'
+            typeof p.githubUrl === 'string' &&
+            Array.isArray(p.tech)
           );
           
-          if (isValid && parsed.length > 0) {
+          if (isValid) {
+            // Use localStorage data if valid
             setProjects(parsed);
           } else {
-            // Invalid structure or empty, use initial projects
-            setProjects(initialProjects);
+            // Invalid structure, keep initial projects and update localStorage
             localStorage.setItem('projects', JSON.stringify(initialProjects));
+            localStorage.setItem('projects_version', currentVersion);
           }
         } else {
-          setProjects(initialProjects);
+          // Empty array, keep initial projects and update localStorage
           localStorage.setItem('projects', JSON.stringify(initialProjects));
+          localStorage.setItem('projects_version', currentVersion);
         }
-      } catch {
-        // If parsing fails, use initial projects
-        setProjects(initialProjects);
+      } catch (error) {
+        // If parsing fails, keep initial projects and update localStorage
+        console.error('Error parsing projects from localStorage:', error);
         localStorage.setItem('projects', JSON.stringify(initialProjects));
+        localStorage.setItem('projects_version', currentVersion);
       }
     } else {
-      // No localStorage data, use initial projects
-      setProjects(initialProjects);
+      // No localStorage data or version mismatch, use initial projects
       localStorage.setItem('projects', JSON.stringify(initialProjects));
       localStorage.setItem('projects_version', currentVersion);
     }
