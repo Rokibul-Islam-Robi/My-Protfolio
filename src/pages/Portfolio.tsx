@@ -7,10 +7,6 @@ import {
   GithubLogo, 
   LinkedinLogo, 
   EnvelopeSimple, 
-<<<<<<< HEAD
-=======
-  DownloadSimple, 
->>>>>>> b8b2a2a9850de7d17f9db26e3996e42d3b4089cf
   ArrowRight,
   Code,
   Palette,
@@ -21,17 +17,9 @@ import {
   Medal,
   Plus
 } from 'phosphor-react';
-<<<<<<< HEAD
 import CertificateCard from '../components/CertificateCard';
 import { certificates as initialCertificates, Certificate } from '../data/certificates';
 import { projects as initialProjects, Project } from '../data/projects';
-=======
-import { cvLinks } from '../data/cv';
-import CertificateCard from '../components/CertificateCard';
-import { certificates as initialCertificates, Certificate } from '../data/certificates';
-import { projects as initialProjects, Project } from '../data/projects';
-import CVPreview from '../components/CVPreview';
->>>>>>> b8b2a2a9850de7d17f9db26e3996e42d3b4089cf
 import ProjectManager from '../components/ProjectManager';
 import ProjectCard from '../components/ProjectCard';
 
