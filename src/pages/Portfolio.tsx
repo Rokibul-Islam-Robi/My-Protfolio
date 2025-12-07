@@ -69,26 +69,6 @@ const Portfolio = () => {
       localStorage.setItem('certificates', JSON.stringify(initialCertificates));
     }
 
-    // Load certificates
-    const storedCertificates = localStorage.getItem('certificates');
-    if (storedCertificates) {
-      try {
-        const parsed = JSON.parse(storedCertificates);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          setCertificates(parsed);
-        } else {
-          setCertificates(initialCertificates);
-          localStorage.setItem('certificates', JSON.stringify(initialCertificates));
-        }
-      } catch {
-        setCertificates(initialCertificates);
-        localStorage.setItem('certificates', JSON.stringify(initialCertificates));
-      }
-    } else {
-      setCertificates(initialCertificates);
-      localStorage.setItem('certificates', JSON.stringify(initialCertificates));
-    }
-
     // CRITICAL: Always ensure projects are set to initialProjects
     // Force set projects to ensure they're always there
     setProjects(initialProjects);
