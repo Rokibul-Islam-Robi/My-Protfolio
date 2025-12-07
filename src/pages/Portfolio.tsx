@@ -23,6 +23,7 @@ import { projects as initialProjects, Project } from '../data/projects';
 import ProjectManager from '../components/ProjectManager';
 import ProjectCard from '../components/ProjectCard';
 import ContactCard from '../components/ContactCard';
+import ContactAnimation from '../components/ContactAnimation';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -614,8 +615,20 @@ const Portfolio = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" ref={contactRef} className="py-24 px-6 lg:px-8">
-        <div className="container mx-auto max-w-5xl">
+      <section id="contact" ref={contactRef} className="py-24 px-6 lg:px-8 relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 w-full h-full">
+          <ContactAnimation />
+        </div>
+        
+        {/* Gradient Orbs for Depth */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-blue/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-neon-purple/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-neon-cyan/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        </div>
+
+        <div className="container mx-auto max-w-5xl relative z-10">
           <div className="text-center mb-20">
             <h2 className="text-4xl lg:text-5xl font-bold mb-8" style={{ background: 'linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(271 81% 56%) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Get In Touch
