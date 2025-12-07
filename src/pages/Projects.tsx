@@ -5,15 +5,7 @@ import Navigation from '../components/Navigation';
 import PlanetAnimation from '../components/PlanetAnimation';
 import ProjectCard from '../components/ProjectCard';
 import ProjectManager from '../components/ProjectManager';
-import { getFeaturedProjects, getAllProjects, projects as allProjectsData } from '../data/projects';
-
-// Debug: Verify projects are imported correctly at module level
-if (typeof window !== 'undefined') {
-  console.log('Projects Module: All projects data imported:', allProjectsData?.length || 0, allProjectsData);
-  if (!allProjectsData || allProjectsData.length === 0) {
-    console.error('CRITICAL ERROR: No projects found in projects data import!');
-  }
-}
+import { getFeaturedProjects, getAllProjects } from '../data/projects';
 import { 
   GithubLogo, 
   Globe, 
@@ -80,16 +72,6 @@ const Projects = () => {
   // Get projects from data file - these should always be available
   const featuredProjects = getFeaturedProjects();
   const allProjects = getAllProjects();
-  
-  // Debug logging
-  console.log('Projects page: Featured projects count:', featuredProjects.length);
-  console.log('Projects page: All projects count:', allProjects.length);
-  console.log('Projects page: Featured projects:', featuredProjects);
-  console.log('Projects page: All projects:', allProjects);
-  
-  if (featuredProjects.length === 0 || allProjects.length === 0) {
-    console.error('ERROR: No projects found in data file!');
-  }
 
   return (
     <div ref={containerRef} className="relative min-h-screen">

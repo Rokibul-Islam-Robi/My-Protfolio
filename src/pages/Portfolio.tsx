@@ -23,13 +23,6 @@ import { projects as initialProjects, Project } from '../data/projects';
 import ProjectManager from '../components/ProjectManager';
 import ProjectCard from '../components/ProjectCard';
 
-// Debug: Verify projects are imported correctly at module level
-if (typeof window !== 'undefined') {
-  console.log('Portfolio Module: Initial projects imported:', initialProjects?.length || 0, initialProjects);
-  if (!initialProjects || initialProjects.length === 0) {
-    console.error('CRITICAL ERROR: No projects found in initialProjects import!');
-  }
-}
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,7 +33,7 @@ const Portfolio = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const [certificates, setCertificates] = useState<Certificate[]>([]);
-  // Initialize with initialProjects to ensure they display immediately
+  // CRITICAL: Always initialize with initialProjects - this ensures projects show immediately
   const [projects, setProjects] = useState<Project[]>(initialProjects);
   const [isProjectManagerOpen, setIsProjectManagerOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
@@ -76,17 +69,33 @@ const Portfolio = () => {
       localStorage.setItem('certificates', JSON.stringify(initialCertificates));
     }
 
-    // Load projects - FORCE use initial projects and update localStorage
-    // This ensures projects always display
-    const currentVersion = '2.2'; // Increment version to force refresh
-    
-    // Always use initial projects and sync to localStorage
+    // Load certificates
+    const storedCertificates = localStorage.getItem('certificates');
+    if (storedCertificates) {
+      try {
+        const parsed = JSON.parse(storedCertificates);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setCertificates(parsed);
+        } else {
+          setCertificates(initialCertificates);
+          localStorage.setItem('certificates', JSON.stringify(initialCertificates));
+        }
+      } catch {
+        setCertificates(initialCertificates);
+        localStorage.setItem('certificates', JSON.stringify(initialCertificates));
+      }
+    } else {
+      setCertificates(initialCertificates);
+      localStorage.setItem('certificates', JSON.stringify(initialCertificates));
+    }
+
+    // CRITICAL: Always ensure projects are set to initialProjects
+    // Force set projects to ensure they're always there
     setProjects(initialProjects);
-    localStorage.setItem('projects', JSON.stringify(initialProjects));
-    localStorage.setItem('projects_version', currentVersion);
     
-    // Log for debugging
-    console.log('Portfolio: Loaded projects:', initialProjects.length, initialProjects);
+    // Update localStorage to match
+    localStorage.setItem('projects', JSON.stringify(initialProjects));
+    localStorage.setItem('projects_version', '2.3');
   }, []);
 
   const handleDeleteCertificate = (certificateId: string) => {
@@ -500,10 +509,6 @@ const Portfolio = () => {
             <p className="text-white text-lg max-w-2xl mx-auto">
               A showcase of my latest work in web development, 3D experiences, and innovative digital solutions.
             </p>
-            {/* Debug info */}
-            <div className="mt-4 text-xs text-text-muted">
-              Debug: Projects in state: {projects?.length || 0} | Initial projects: {initialProjects?.length || 0}
-            </div>
             <button
               onClick={() => {
                 setEditingProject(null);
@@ -516,47 +521,16 @@ const Portfolio = () => {
             </button>
           </div>
           
-          {(() => {
-            console.log('Portfolio: Rendering projects section, projects count:', projects.length);
-            console.log('Portfolio: Projects data:', projects);
-            
-            if (projects && projects.length > 0) {
-              return (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {projects.map((project) => {
-                    console.log('Portfolio: Rendering project:', project.title);
-                    return (
-                      <ProjectCard 
-                        key={project.id} 
-                        project={project} 
-                        onDelete={handleDeleteProject}
-                        onEdit={handleEditProject}
-                      />
-                    );
-                  })}
-                </div>
-              );
-            } else {
-              return (
-                <div className="text-center py-12">
-                  <p className="text-text-secondary text-lg mb-4">
-                    No projects found. Projects count: {projects?.length || 0}. 
-                    Click "Add New Project" to get started!
-                  </p>
-                  <button
-                    onClick={() => {
-                      console.log('Force reloading initial projects');
-                      setProjects(initialProjects);
-                      localStorage.setItem('projects', JSON.stringify(initialProjects));
-                    }}
-                    className="neon-button mt-4"
-                  >
-                    Reload Projects
-                  </button>
-                </div>
-              );
-            }
-          })()}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {(projects.length > 0 ? projects : initialProjects).map((project) => (
+              <ProjectCard 
+                key={project.id} 
+                project={project} 
+                onDelete={handleDeleteProject}
+                onEdit={handleEditProject}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
