@@ -504,31 +504,47 @@ const Portfolio = () => {
           </div>
           
           {/* Force render projects - use initialProjects directly to ensure they show */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {initialProjects.map((project) => {
-              // Validate project before rendering
-              if (!project || !project.id || !project.title) {
-                console.error('Invalid project data:', project);
-                return null;
-              }
-              
-              return (
-                <ProjectCard 
-                  key={`project-${project.id}`}
-                  project={project} 
-                  onDelete={handleDeleteProject}
-                  onEdit={handleEditProject}
-                />
-              );
-            })}
-          </div>
-          
-          {/* Fallback message if no projects */}
-          {initialProjects.length === 0 && (
+          {initialProjects && initialProjects.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {initialProjects.map((project) => {
+                // Validate project before rendering
+                if (!project || !project.id || !project.title) {
+                  console.error('Invalid project data:', project);
+                  return null;
+                }
+                
+                try {
+                  return (
+                    <ProjectCard 
+                      key={`project-${project.id}`}
+                      project={project} 
+                      onDelete={handleDeleteProject}
+                      onEdit={handleEditProject}
+                    />
+                  );
+                } catch (error) {
+                  console.error('Error rendering ProjectCard for project:', project.title, error);
+                  return (
+                    <div key={`project-error-${project.id}`} className="glass-card p-6">
+                      <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                      <p className="text-text-secondary">{project.description}</p>
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="text-neon-blue mt-4 inline-block">
+                        View on GitHub
+                      </a>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          ) : (
             <div className="text-center py-12">
-              <p className="text-text-secondary text-lg">
-                No projects available. Please check the projects data file.
+              <p className="text-text-secondary text-lg mb-4">
+                No projects available. Initial projects count: {initialProjects?.length || 0}
               </p>
+              <div className="glass-card p-6 max-w-md mx-auto">
+                <h3 className="text-xl font-bold mb-2">Test Project Card</h3>
+                <p className="text-text-secondary">If you can see this, the grid is working but projects data is missing.</p>
+              </div>
             </div>
           )}
         </div>
