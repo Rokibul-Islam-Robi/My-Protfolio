@@ -22,6 +22,7 @@ import { certificates as initialCertificates, Certificate } from '../data/certif
 import { projects as initialProjects, Project } from '../data/projects';
 import ProjectManager from '../components/ProjectManager';
 import ProjectCard from '../components/ProjectCard';
+import ContactCard from '../components/ContactCard';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -629,72 +630,106 @@ const Portfolio = () => {
               </p>
               
               <div className="space-y-6">
-                <div className="flex items-center gap-4 p-4 glass-card rounded-lg hover:shadow-glow-blue transition-all duration-300">
-                  <div className="glass-card p-3 rounded-lg">
-                    <EnvelopeSimple size={24} className="text-neon-blue" />
-                  </div>
-                  <div>
-                    <p className="text-text-primary font-medium">Email</p>
-                    <p className="text-text-secondary">rokebul.islam088@gmail.com</p>
-                  </div>
-                </div>
+                <ContactCard
+                  icon={EnvelopeSimple}
+                  title="Email"
+                  content="rokebul.islam088@gmail.com"
+                  href="mailto:rokebul.islam088@gmail.com"
+                  color="blue"
+                />
                 
-                <div className="flex items-center gap-4 p-4 glass-card rounded-lg hover:shadow-glow-purple transition-all duration-300">
-                  <div className="glass-card p-3 rounded-lg">
-                    <GithubLogo size={24} className="text-neon-purple" />
-                  </div>
-                  <div>
-                    <p className="text-text-primary font-medium">GitHub</p>
-                    <p className="text-text-secondary">github.com/Rokibul-Islam-Robi</p>
-                  </div>
-                </div>
+                <ContactCard
+                  icon={GithubLogo}
+                  title="GitHub"
+                  content="github.com/Rokibul-Islam-Robi"
+                  href="https://github.com/Rokibul-Islam-Robi"
+                  color="purple"
+                />
                 
-                <div className="flex items-center gap-4 p-4 glass-card rounded-lg hover:shadow-glow-cyan transition-all duration-300">
-                  <div className="glass-card p-3 rounded-lg">
-                    <LinkedinLogo size={24} className="text-neon-cyan" />
-                  </div>
-                  <div>
-                    <p className="text-text-primary font-medium">LinkedIn</p>
-                    <p className="text-text-secondary">linkedin.com/in/rokibulislam088</p>
-                  </div>
-                </div>
+                <ContactCard
+                  icon={LinkedinLogo}
+                  title="LinkedIn"
+                  content="linkedin.com/in/rokibulislam088"
+                  href="https://www.linkedin.com/in/rokibulislam088"
+                  color="cyan"
+                />
               </div>
             </div>
             
-            <div className="contact-form glass-card p-10">
-              <h3 className="text-2xl font-bold mb-8 text-text-primary text-center">Send Message</h3>
-              <form className="space-y-6">
-                <div>
-                  <label className="block text-text-primary font-medium mb-3">Name</label>
-                  <input 
-                    type="text" 
-                    className="input-glow w-full px-4 py-4 rounded-lg text-text-primary placeholder-text-muted"
-                    placeholder="Your name"
-                  />
+            <div className="contact-form project-card-3d-container" style={{ userSelect: 'none' }}>
+              <div className="project-card-3d-canvas h-full">
+                {/* 3D Tracking Grid */}
+                {Array.from({ length: 25 }).map((_, i) => (
+                  <div key={i} className="project-card-3d-tracker" />
+                ))}
+
+                {/* 3D Card */}
+                <div className="project-card-3d-card h-full">
+                  <div className="project-card-3d-content glass-card p-10 hover:shadow-glow-strong transition-all duration-500 group h-full">
+                    {/* Cyber Effects */}
+                    <div className="project-card-cyber-lines">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+
+                    <div className="project-card-corners">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+
+                    <div className="project-card-glows">
+                      <div className="project-card-glow"></div>
+                      <div className="project-card-glow"></div>
+                      <div className="project-card-glow"></div>
+                    </div>
+
+                    <div className="project-card-scan-line"></div>
+                    <div className="project-card-glare"></div>
+                    <h3 className="text-2xl font-bold mb-8 text-text-primary text-center transform-gpu transition-transform duration-300 group-hover:scale-105">
+                      Send Message
+                    </h3>
+                    <form className="space-y-6">
+                      <div className="transform-gpu transition-transform duration-300 group-hover:translate-x-1">
+                        <label className="block text-text-primary font-medium mb-3">Name</label>
+                        <input 
+                          type="text" 
+                          className="input-glow w-full px-4 py-4 rounded-lg text-text-primary placeholder-text-muted bg-background-secondary/30 border border-glass-border/30 focus:border-neon-blue/50 focus:outline-none transition-all duration-300"
+                          placeholder="Your name"
+                        />
+                      </div>
+                      
+                      <div className="transform-gpu transition-transform duration-300 group-hover:translate-x-1">
+                        <label className="block text-text-primary font-medium mb-3">Email</label>
+                        <input 
+                          type="email" 
+                          className="input-glow w-full px-4 py-4 rounded-lg text-text-primary placeholder-text-muted bg-background-secondary/30 border border-glass-border/30 focus:border-neon-blue/50 focus:outline-none transition-all duration-300"
+                          placeholder="your@email.com"
+                        />
+                      </div>
+                      
+                      <div className="transform-gpu transition-transform duration-300 group-hover:translate-x-1">
+                        <label className="block text-text-primary font-medium mb-3">Message</label>
+                        <textarea 
+                          rows={5}
+                          className="input-glow w-full px-4 py-4 rounded-lg text-text-primary placeholder-text-muted resize-none bg-background-secondary/30 border border-glass-border/30 focus:border-neon-blue/50 focus:outline-none transition-all duration-300"
+                          placeholder="Tell me about your project..."
+                        />
+                      </div>
+                      
+                      <button 
+                        type="submit" 
+                        className="neon-button w-full py-4 text-lg font-semibold transform-gpu transition-all duration-300 hover:scale-105 hover:shadow-glow-blue"
+                      >
+                        Send Message
+                      </button>
+                    </form>
+                  </div>
                 </div>
-                
-                <div>
-                  <label className="block text-text-primary font-medium mb-3">Email</label>
-                  <input 
-                    type="email" 
-                    className="input-glow w-full px-4 py-4 rounded-lg text-text-primary placeholder-text-muted"
-                    placeholder="your@email.com"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-text-primary font-medium mb-3">Message</label>
-                  <textarea 
-                    rows={5}
-                    className="input-glow w-full px-4 py-4 rounded-lg text-text-primary placeholder-text-muted resize-none"
-                    placeholder="Tell me about your project..."
-                  />
-                </div>
-                
-                <button type="submit" className="neon-button w-full py-4 text-lg font-semibold">
-                  Send Message
-                </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>

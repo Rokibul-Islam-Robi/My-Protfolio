@@ -107,20 +107,28 @@ const Projects = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="neon-button group">
+            <a 
+              href="#featured-projects"
+              className="neon-button group inline-flex items-center justify-center"
+            >
               View All Projects
               <Rocket size={20} className="ml-2 inline transition-transform group-hover:translate-x-1" />
-            </button>
-            <button className="glass-card px-8 py-3 border border-glass-border/30 text-text-primary hover:border-neon-blue/50 transition-all duration-300 flex items-center justify-center">
-              <GithubLogo size={20} className="mr-2" />
+            </a>
+            <a 
+              href="https://github.com/Rokibul-Islam-Robi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-card px-8 py-3 border border-glass-border/30 text-text-primary hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-all duration-300 flex items-center justify-center group transform-gpu hover:translate-y-[-2px] hover:shadow-lg hover:shadow-neon-blue/20"
+            >
+              <GithubLogo size={20} className="mr-2 group-hover:rotate-12 transition-transform duration-300" />
               GitHub Profile
-            </button>
+            </a>
           </div>
         </div>
       </section>
 
       {/* Featured Projects */}
-      <section className="featured-section py-20 px-6 lg:px-8">
+      <section id="featured-projects" className="featured-section py-20 px-6 lg:px-8">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold mb-6" style={{ background: 'linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(271 81% 56%) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
@@ -193,10 +201,15 @@ const Projects = () => {
                 Start a Project
                 <Rocket size={20} className="ml-2 inline transition-transform group-hover:translate-x-1" />
               </button>
-              <button className="glass-card px-8 py-3 border border-glass-border/30 text-text-primary hover:border-neon-blue/50 transition-all duration-300 flex items-center justify-center">
-                <Code size={20} className="mr-2" />
+              <a 
+                href="https://github.com/Rokibul-Islam-Robi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card px-8 py-3 border border-glass-border/30 text-text-primary hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-all duration-300 flex items-center justify-center group transform-gpu hover:translate-y-[-2px] hover:shadow-lg hover:shadow-neon-blue/20"
+              >
+                <Code size={20} className="mr-2 group-hover:rotate-12 transition-transform duration-300" />
                 View GitHub
-              </button>
+              </a>
             </div>
           </div>
         </div>

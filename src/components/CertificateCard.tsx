@@ -31,22 +31,25 @@ const CertificateCard = ({ certificate, onDelete }: CertificateCardProps) => {
     <div className="certification-card glass-card p-6 hover:shadow-glow-purple transition-all duration-500 group transform-gpu perspective-1000">
       {/* Certificate Image with 3D Effect */}
       <div className="relative mb-4 transform-gpu transition-transform duration-500 group-hover:rotate-y-12 group-hover:scale-105">
-        {!imageError ? (
-          <div className="w-full min-h-[300px] bg-gradient-to-br from-background-secondary/50 to-background-tertiary/50 rounded-lg p-4 border border-glass-border/30 flex items-center justify-center">
+        {!imageError && imageUrl && !imageUrl.includes('placeholder') ? (
+          <div className="w-full min-h-[300px] bg-gradient-to-br from-background-secondary/50 to-background-tertiary/50 rounded-lg p-4 border border-glass-border/30 flex items-center justify-center overflow-hidden">
             <img 
               src={imageUrl} 
               alt={certificate.name}
-              className="w-full h-auto max-h-[300px] object-contain rounded-lg transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-neon-purple/30"
+              className="w-full h-auto max-h-[300px] object-contain rounded-lg transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-neon-purple/30 group-hover:scale-110"
               onError={handleImageError}
               loading="lazy"
             />
           </div>
         ) : (
-          <div className="w-full min-h-[300px] bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 rounded-lg flex items-center justify-center border-2 border-dashed border-neon-blue/30">
-            <div className="text-center">
-              <Medal size={48} className="text-neon-purple mx-auto mb-2" />
-              <p className="text-text-secondary text-sm">Certificate Image</p>
-              <p className="text-text-muted text-xs">Not Available</p>
+          <div className="w-full min-h-[300px] bg-gradient-to-br from-neon-blue/20 via-neon-purple/20 to-neon-cyan/20 rounded-lg flex items-center justify-center border-2 border-dashed border-neon-blue/30 group-hover:border-neon-purple/50 transition-all duration-500">
+            <div className="text-center p-8">
+              <div className="glass-card p-4 rounded-full inline-block mb-4 transform-gpu transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
+                <Medal size={48} className="text-neon-purple" />
+              </div>
+              <p className="text-text-primary font-semibold mb-1">{certificate.name}</p>
+              <p className="text-text-secondary text-sm mb-2">{certificate.issuer}</p>
+              <p className="text-text-muted text-xs">Certificate Image</p>
             </div>
           </div>
         )}

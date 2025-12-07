@@ -138,10 +138,22 @@ const ProjectCard = ({ project, onDelete, onEdit, variant }: ProjectCardProps) =
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 glass-card py-2 text-sm font-medium text-text-primary hover:text-neon-blue border border-glass-border/30 hover:border-neon-blue/50 transition-all duration-300 flex items-center justify-center gap-2"
+                className="flex-1 relative py-3 px-4 text-sm font-bold text-white bg-gradient-to-r from-[#2d333b] via-[#1c2128] to-[#22272e] hover:from-[#1c2128] hover:via-[#2d333b] hover:to-[#1c2128] border-2 border-[#444c56] hover:border-[#539bf5] transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg shadow-black/50 hover:shadow-[#539bf5]/30 transform-gpu hover:translate-y-[-3px] hover:scale-[1.02] overflow-hidden rounded-lg"
+                title="View Code on GitHub"
+                style={{
+                  background: 'linear-gradient(135deg, #1c2128 0%, #2d333b 50%, #22272e 100%)',
+                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(83, 155, 245, 0)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(83, 155, 245, 0.4), 0 0 0 1px rgba(83, 155, 245, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(83, 155, 245, 0)';
+                }}
               >
-                <GithubLogo size={16} />
-                GitHub
+                <GithubLogo size={18} weight="bold" className="group-hover:rotate-12 transition-transform duration-300 flex-shrink-0" />
+                <span className="font-semibold">View Code</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
               </a>
             )}
             {project.liveUrl && (
@@ -149,10 +161,11 @@ const ProjectCard = ({ project, onDelete, onEdit, variant }: ProjectCardProps) =
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 glass-card py-2 text-sm font-medium text-text-primary hover:text-neon-purple border border-glass-border/30 hover:border-neon-purple/50 transition-all duration-300 flex items-center justify-center gap-2"
+                className="flex-1 glass-card py-2.5 text-sm font-medium text-text-primary hover:text-neon-purple border border-glass-border/30 hover:border-neon-purple/50 hover:bg-neon-purple/10 transition-all duration-300 flex items-center justify-center gap-2 group transform-gpu hover:translate-y-[-2px] hover:shadow-lg hover:shadow-neon-purple/20"
+                title="View Live Demo"
               >
-                <Link size={16} />
-                Live
+                <Link size={16} className="group-hover:rotate-45 transition-transform duration-300" />
+                Live Demo
               </a>
             )}
             {onEdit && (
