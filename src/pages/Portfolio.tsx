@@ -69,14 +69,29 @@ const Portfolio = () => {
       localStorage.setItem('certificates', JSON.stringify(initialCertificates));
     }
 
-    // CRITICAL: Always ensure projects are set to initialProjects
-    // Force set projects to ensure they're always there
-    console.log('useEffect: Setting projects. initialProjects length:', initialProjects.length);
-    console.log('useEffect: initialProjects:', initialProjects);
-    setProjects(initialProjects);
+    // Load projects from localStorage or use initialProjects
+    const storedProjects = localStorage.getItem('projects');
+    if (storedProjects) {
+      try {
+        const parsed = JSON.parse(storedProjects);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setProjects(parsed);
+        } else {
+          // If localStorage has invalid data, use initialProjects
+          setProjects(initialProjects);
+          localStorage.setItem('projects', JSON.stringify(initialProjects));
+        }
+      } catch {
+        // If parsing fails, use initialProjects
+        setProjects(initialProjects);
+        localStorage.setItem('projects', JSON.stringify(initialProjects));
+      }
+    } else {
+      // No localStorage data, use initialProjects
+      setProjects(initialProjects);
+      localStorage.setItem('projects', JSON.stringify(initialProjects));
+    }
     
-    // Update localStorage to match
-    localStorage.setItem('projects', JSON.stringify(initialProjects));
     localStorage.setItem('projects_version', '2.3');
   }, []);
 
@@ -503,47 +518,34 @@ const Portfolio = () => {
             </button>
           </div>
           
-          {/* Force render projects - use initialProjects directly to ensure they show */}
-          {initialProjects && initialProjects.length > 0 ? (
+          {/* Render projects from state */}
+          {projects && projects.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {initialProjects.map((project) => {
+              {projects.map((project) => {
                 // Validate project before rendering
                 if (!project || !project.id || !project.title) {
-                  console.error('Invalid project data:', project);
                   return null;
                 }
                 
-                try {
-                  return (
+                return (
+                  <div key={`project-${project.id}`} className="min-h-[400px]">
                     <ProjectCard 
-                      key={`project-${project.id}`}
                       project={project} 
                       onDelete={handleDeleteProject}
                       onEdit={handleEditProject}
                     />
-                  );
-                } catch (error) {
-                  console.error('Error rendering ProjectCard for project:', project.title, error);
-                  return (
-                    <div key={`project-error-${project.id}`} className="glass-card p-6">
-                      <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                      <p className="text-text-secondary">{project.description}</p>
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="text-neon-blue mt-4 inline-block">
-                        View on GitHub
-                      </a>
-                    </div>
-                  );
-                }
+                  </div>
+                );
               })}
             </div>
           ) : (
             <div className="text-center py-12">
               <p className="text-text-secondary text-lg mb-4">
-                No projects available. Initial projects count: {initialProjects?.length || 0}
+                No projects available. Projects count: {projects?.length || 0}
               </p>
               <div className="glass-card p-6 max-w-md mx-auto">
-                <h3 className="text-xl font-bold mb-2">Test Project Card</h3>
-                <p className="text-text-secondary">If you can see this, the grid is working but projects data is missing.</p>
+                <h3 className="text-xl font-bold mb-2">Projects Loading</h3>
+                <p className="text-text-secondary">Please wait while projects are being loaded.</p>
               </div>
             </div>
           )}
