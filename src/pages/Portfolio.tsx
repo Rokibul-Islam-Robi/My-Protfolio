@@ -235,7 +235,6 @@ const Portfolio = () => {
                 muted 
                 loop 
                 playsInline
-                playsinline
                 className="w-full h-full object-cover opacity-30"
                 style={{ filter: 'blur(1px)' }}
                 aria-label="Background particle animation video"
