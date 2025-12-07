@@ -503,41 +503,34 @@ const Portfolio = () => {
             </button>
           </div>
           
-          {/* Debug: Show project count */}
-          <div className="mb-4 text-center text-sm text-text-muted">
-            Projects to display: {(projects.length > 0 ? projects : initialProjects).length}
-          </div>
-          
+          {/* Force render projects - use initialProjects directly to ensure they show */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {(() => {
-              const projectsToRender = projects.length > 0 ? projects : initialProjects;
-              console.log('Rendering projects:', projectsToRender.length, projectsToRender);
-              
-              if (!projectsToRender || projectsToRender.length === 0) {
-                return (
-                  <div className="col-span-full text-center py-12">
-                    <p className="text-text-secondary">No projects found. Projects state: {projects.length}, Initial: {initialProjects.length}</p>
-                  </div>
-                );
+            {initialProjects.map((project) => {
+              // Validate project before rendering
+              if (!project || !project.id || !project.title) {
+                console.error('Invalid project data:', project);
+                return null;
               }
               
-              return projectsToRender.map((project) => {
-                console.log('Rendering project card for:', project.title);
-                if (!project || !project.id) {
-                  console.error('Invalid project:', project);
-                  return null;
-                }
-                return (
-                  <ProjectCard 
-                    key={project.id} 
-                    project={project} 
-                    onDelete={handleDeleteProject}
-                    onEdit={handleEditProject}
-                  />
-                );
-              });
-            })()}
+              return (
+                <ProjectCard 
+                  key={`project-${project.id}`}
+                  project={project} 
+                  onDelete={handleDeleteProject}
+                  onEdit={handleEditProject}
+                />
+              );
+            })}
           </div>
+          
+          {/* Fallback message if no projects */}
+          {initialProjects.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-text-secondary text-lg">
+                No projects available. Please check the projects data file.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
