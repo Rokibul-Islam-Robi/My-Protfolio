@@ -71,6 +71,8 @@ const Portfolio = () => {
 
     // CRITICAL: Always ensure projects are set to initialProjects
     // Force set projects to ensure they're always there
+    console.log('useEffect: Setting projects. initialProjects length:', initialProjects.length);
+    console.log('useEffect: initialProjects:', initialProjects);
     setProjects(initialProjects);
     
     // Update localStorage to match
@@ -501,15 +503,40 @@ const Portfolio = () => {
             </button>
           </div>
           
+          {/* Debug: Show project count */}
+          <div className="mb-4 text-center text-sm text-text-muted">
+            Projects to display: {(projects.length > 0 ? projects : initialProjects).length}
+          </div>
+          
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {(projects.length > 0 ? projects : initialProjects).map((project) => (
-              <ProjectCard 
-                key={project.id} 
-                project={project} 
-                onDelete={handleDeleteProject}
-                onEdit={handleEditProject}
-              />
-            ))}
+            {(() => {
+              const projectsToRender = projects.length > 0 ? projects : initialProjects;
+              console.log('Rendering projects:', projectsToRender.length, projectsToRender);
+              
+              if (!projectsToRender || projectsToRender.length === 0) {
+                return (
+                  <div className="col-span-full text-center py-12">
+                    <p className="text-text-secondary">No projects found. Projects state: {projects.length}, Initial: {initialProjects.length}</p>
+                  </div>
+                );
+              }
+              
+              return projectsToRender.map((project) => {
+                console.log('Rendering project card for:', project.title);
+                if (!project || !project.id) {
+                  console.error('Invalid project:', project);
+                  return null;
+                }
+                return (
+                  <ProjectCard 
+                    key={project.id} 
+                    project={project} 
+                    onDelete={handleDeleteProject}
+                    onEdit={handleEditProject}
+                  />
+                );
+              });
+            })()}
           </div>
         </div>
       </section>
