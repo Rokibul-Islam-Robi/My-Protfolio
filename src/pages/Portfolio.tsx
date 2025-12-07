@@ -7,6 +7,10 @@ import {
   GithubLogo, 
   LinkedinLogo, 
   EnvelopeSimple, 
+<<<<<<< HEAD
+=======
+  DownloadSimple, 
+>>>>>>> b8b2a2a9850de7d17f9db26e3996e42d3b4089cf
   ArrowRight,
   Code,
   Palette,
@@ -17,9 +21,17 @@ import {
   Medal,
   Plus
 } from 'phosphor-react';
+<<<<<<< HEAD
 import CertificateCard from '../components/CertificateCard';
 import { certificates as initialCertificates, Certificate } from '../data/certificates';
 import { projects as initialProjects, Project } from '../data/projects';
+=======
+import { cvLinks } from '../data/cv';
+import CertificateCard from '../components/CertificateCard';
+import { certificates as initialCertificates, Certificate } from '../data/certificates';
+import { projects as initialProjects, Project } from '../data/projects';
+import CVPreview from '../components/CVPreview';
+>>>>>>> b8b2a2a9850de7d17f9db26e3996e42d3b4089cf
 import ProjectManager from '../components/ProjectManager';
 import ProjectCard from '../components/ProjectCard';
 
@@ -313,6 +325,7 @@ const Portfolio = () => {
           </div>
           
           <div className="max-w-4xl mx-auto">
+<<<<<<< HEAD
             <div className="glass-card p-8 lg:p-12 border border-glass-border/30 backdrop-blur-xl bg-background/40">
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Personal Info */}
@@ -439,6 +452,144 @@ const Portfolio = () => {
                         </svg>
                       </div>
                     </button>
+=======
+            <div className="corporate-contact-card relative glass-card p-8 lg:p-12 overflow-hidden">
+              {/* Animated Border */}
+              <div className="absolute inset-0 border-2 border-transparent rounded-xl">
+                <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-cyan rounded-xl opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-[2px] bg-background rounded-xl"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-cyan rounded-xl opacity-0 hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
+              </div>
+              
+              {/* Content */}
+              <div className="relative z-10">
+                <div className="grid md:grid-cols-2 gap-8">
+                  {/* Personal Info */}
+                  <div className="space-y-6">
+                                         <div className="flex items-center gap-4">
+                       <div className="glass-card p-3 rounded-lg">
+                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-neon-blue">
+                           <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                         </svg>
+                       </div>
+                       <div>
+                         <h3 className="text-xl font-bold text-text-primary">Rokibul Islam Robi</h3>
+                         <p className="text-text-secondary">Software Engineering Student</p>
+                       </div>
+                     </div>
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-4">
+                        <div className="glass-card p-2 rounded-lg">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-neon-purple">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="text-text-secondary text-sm">Contact Number</p>
+                          <p className="text-text-primary font-medium">01531150655</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center gap-4">
+                        <div className="glass-card p-2 rounded-lg">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-neon-cyan">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="text-text-secondary text-sm">Primary Email</p>
+                          <p className="text-text-primary font-medium">rokebul.islam088@gmail.com</p>
+                        </div>
+                      </div>
+                      
+                                             <div className="flex items-center gap-4">
+                         <div className="glass-card p-2 rounded-lg">
+                           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-neon-blue">
+                             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                           </svg>
+                         </div>
+                         <div>
+                           <p className="text-text-secondary text-sm">Academic Email</p>
+                           <p className="text-text-primary font-medium">islam222053411672diu.edu.bd</p>
+                         </div>
+                       </div>
+                       
+                       <div className="flex items-center gap-4">
+                         <div className="glass-card p-2 rounded-lg">
+                           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-neon-purple">
+                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                           </svg>
+                         </div>
+                         <div>
+                           <p className="text-text-secondary text-sm">Occupation</p>
+                           <p className="text-text-primary font-medium">Student</p>
+                         </div>
+                       </div>
+                       
+                       <div className="flex items-center gap-4">
+                         <div className="glass-card p-2 rounded-lg">
+                           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-neon-cyan">
+                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                           </svg>
+                         </div>
+                         <div>
+                           <p className="text-text-secondary text-sm">Nationality</p>
+                           <p className="text-text-primary font-medium">Bangladeshi</p>
+                         </div>
+                       </div>
+                       
+                       <div className="flex items-center gap-4">
+                         <div className="glass-card p-2 rounded-lg">
+                           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-red-400">
+                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                           </svg>
+                         </div>
+                         <div>
+                           <p className="text-text-secondary text-sm">Blood Group</p>
+                           <p className="text-text-primary font-medium">B+</p>
+                         </div>
+                       </div>
+                    </div>
+                  </div>
+                  
+                  {/* Quick Actions */}
+                  <div className="space-y-6">
+                    <h4 className="text-lg font-semibold text-text-primary mb-4">Quick Actions</h4>
+                    <div className="space-y-3">
+                      <button className="w-full glass-card p-4 text-left hover:border-neon-purple/50 transition-all duration-300 border border-glass-border/30 rounded-lg group">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="p-2 rounded-lg bg-neon-purple/10">
+                              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-neon-purple">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                              </svg>
+                            </div>
+                            <span className="text-text-primary font-medium">Send Email</span>
+                          </div>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-text-secondary group-hover:text-neon-purple transition-colors">
+                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 19l8-8-8-8z"/>
+                          </svg>
+                        </div>
+                      </button>
+                      
+                      <button className="w-full glass-card p-4 text-left hover:border-neon-cyan/50 transition-all duration-300 border border-glass-border/30 rounded-lg group">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="p-2 rounded-lg bg-neon-cyan/10">
+                              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-neon-cyan">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                              </svg>
+                            </div>
+                            <span className="text-text-primary font-medium">Schedule Call</span>
+                          </div>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-text-secondary group-hover:text-neon-cyan transition-colors">
+                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 19l8-8-8-8z"/>
+                          </svg>
+                        </div>
+                      </button>
+                    </div>
+>>>>>>> b8b2a2a9850de7d17f9db26e3996e42d3b4089cf
                   </div>
                 </div>
               </div>
