@@ -500,6 +500,10 @@ const Portfolio = () => {
             <p className="text-white text-lg max-w-2xl mx-auto">
               A showcase of my latest work in web development, 3D experiences, and innovative digital solutions.
             </p>
+            {/* Debug info */}
+            <div className="mt-4 text-xs text-text-muted">
+              Debug: Projects in state: {projects?.length || 0} | Initial projects: {initialProjects?.length || 0}
+            </div>
             <button
               onClick={() => {
                 setEditingProject(null);
