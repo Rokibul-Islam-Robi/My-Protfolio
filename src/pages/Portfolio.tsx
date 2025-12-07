@@ -630,7 +630,7 @@ const Portfolio = () => {
               </p>
               
               <div className="space-y-6">
-                <div className="w-full h-[120px]">
+                <div className="w-full" style={{ minHeight: '120px', height: '120px' }}>
                   <ContactCard
                     icon={EnvelopeSimple}
                     title="Email"
@@ -640,7 +640,7 @@ const Portfolio = () => {
                   />
                 </div>
                 
-                <div className="w-full h-[120px]">
+                <div className="w-full" style={{ minHeight: '120px', height: '120px' }}>
                   <ContactCard
                     icon={GithubLogo}
                     title="GitHub"
@@ -650,7 +650,7 @@ const Portfolio = () => {
                   />
                 </div>
                 
-                <div className="w-full h-[120px]">
+                <div className="w-full" style={{ minHeight: '120px', height: '120px' }}>
                   <ContactCard
                     icon={LinkedinLogo}
                     title="LinkedIn"

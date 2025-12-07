@@ -37,16 +37,16 @@ const ContactCard = ({ icon: Icon, title, content, href, color }: ContactCardPro
   const cardId = `contact-card-${title.toLowerCase().replace(/\s+/g, '-')}`;
 
   const cardContent = (
-    <div className="project-card-3d-container h-full min-h-[120px]" style={{ userSelect: 'none', width: '100%' }}>
-      <div className="project-card-3d-canvas h-full" style={{ width: '100%' }}>
+    <div className="project-card-3d-container" style={{ userSelect: 'none', width: '100%', height: '100%', minHeight: '120px' }}>
+      <div className="project-card-3d-canvas" style={{ width: '100%', height: '100%' }}>
         {/* 3D Tracking Grid */}
         {Array.from({ length: 25 }).map((_, i) => (
           <div key={i} className="project-card-3d-tracker" />
         ))}
 
         {/* 3D Card */}
-        <div id={cardId} className="project-card-3d-card h-full" style={{ width: '100%' }}>
-          <div className={`project-card-3d-content glass-card p-6 ${colors.glow} transition-all duration-500 group h-full flex items-center gap-4 ${colors.border} border ${colors.bg} w-full`}>
+        <div id={cardId} className="project-card-3d-card" style={{ width: '100%', height: '100%' }}>
+          <div className={`project-card-3d-content glass-card p-6 ${colors.glow} transition-all duration-500 group flex items-center gap-4 ${colors.border} border ${colors.bg}`} style={{ width: '100%', height: '100%', minHeight: '120px' }}>
             {/* Cyber Effects */}
             <div className="project-card-cyber-lines">
               <span></span>

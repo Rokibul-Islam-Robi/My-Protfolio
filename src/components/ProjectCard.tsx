@@ -132,35 +132,38 @@ const ProjectCard = ({ project, onDelete, onEdit, variant }: ProjectCardProps) =
             </div>
           </div>
           
-          <div className={`flex gap-3 ${!project.liveUrl && project.githubUrl ? 'justify-center' : ''}`}>
-            {project.githubUrl && (
+          <div className={`flex gap-3 mt-4 ${!project.liveUrl && project.githubUrl ? 'justify-center' : ''}`}>
+            {project.githubUrl ? (
               <a 
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`relative py-3.5 px-5 text-sm font-bold text-white border-2 transition-all duration-300 flex items-center justify-center gap-2.5 group shadow-xl transform-gpu hover:translate-y-[-3px] hover:scale-[1.03] overflow-hidden rounded-lg z-10 ${project.liveUrl ? 'flex-1' : 'w-full'}`}
+                className={`relative py-3.5 px-6 text-sm font-bold text-white border-2 transition-all duration-300 flex items-center justify-center gap-2.5 group shadow-xl transform-gpu hover:translate-y-[-3px] hover:scale-[1.03] overflow-hidden rounded-lg z-10 ${project.liveUrl ? 'flex-1' : 'w-full'}`}
                 title={`View ${project.title} on GitHub`}
                 style={{
                   background: 'linear-gradient(135deg, #1c2128 0%, #2d333b 50%, #22272e 100%)',
-                  borderColor: '#444c56',
-                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                  borderColor: '#539bf5',
+                  borderWidth: '2px',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(83, 155, 245, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                  display: 'flex',
+                  minHeight: '44px',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = '#539bf5';
-                  e.currentTarget.style.boxShadow = '0 8px 30px rgba(83, 155, 245, 0.5), 0 0 0 2px rgba(83, 155, 245, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+                  e.currentTarget.style.boxShadow = '0 8px 35px rgba(83, 155, 245, 0.6), 0 0 0 2px rgba(83, 155, 245, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
                   e.currentTarget.style.background = 'linear-gradient(135deg, #1c2128 0%, #2d333b 50%, #1c2128 100%)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = '#444c56';
-                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)';
+                  e.currentTarget.style.borderColor = '#539bf5';
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(83, 155, 245, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)';
                   e.currentTarget.style.background = 'linear-gradient(135deg, #1c2128 0%, #2d333b 50%, #22272e 100%)';
                 }}
               >
-                <GithubLogo size={20} weight="bold" className="group-hover:rotate-12 transition-transform duration-300 flex-shrink-0" style={{ filter: 'drop-shadow(0 0 2px rgba(83, 155, 245, 0.3))' }} />
+                <GithubLogo size={22} weight="bold" className="group-hover:rotate-12 transition-transform duration-300 flex-shrink-0" style={{ filter: 'drop-shadow(0 0 4px rgba(83, 155, 245, 0.5))' }} />
                 <span className="font-bold tracking-wide">View on GitHub</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 pointer-events-none"></div>
               </a>
-            )}
+            ) : null}
             {project.liveUrl && (
               <a 
                 href={project.liveUrl}
