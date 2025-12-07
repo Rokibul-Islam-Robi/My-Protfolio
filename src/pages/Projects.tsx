@@ -137,11 +137,17 @@ const Projects = () => {
             </button>
           </div>
           
-          <div className="grid lg:grid-cols-3 gap-8">
-            {featuredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} variant="featured" />
-            ))}
-          </div>
+          {featuredProjects.length > 0 ? (
+            <div className="grid lg:grid-cols-3 gap-8">
+              {featuredProjects.map((project) => (
+                <ProjectCard key={project.id} project={project} variant="featured" />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-text-secondary text-lg">No featured projects available at the moment.</p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -157,11 +163,17 @@ const Projects = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} variant="all" />
-            ))}
-          </div>
+          {allProjects.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {allProjects.map((project) => (
+                <ProjectCard key={project.id} project={project} variant="all" />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-text-secondary text-lg">No projects available at the moment.</p>
+            </div>
+          )}
         </div>
       </section>
 

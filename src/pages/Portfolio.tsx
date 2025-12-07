@@ -47,18 +47,69 @@ const Portfolio = () => {
   const fullText3 = "A Passionate Software Engineer";
 
   useEffect(() => {
+    // Load certificates
     const storedCertificates = localStorage.getItem('certificates');
     if (storedCertificates) {
-      setCertificates(JSON.parse(storedCertificates));
+      try {
+        const parsed = JSON.parse(storedCertificates);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setCertificates(parsed);
+        } else {
+          setCertificates(initialCertificates);
+          localStorage.setItem('certificates', JSON.stringify(initialCertificates));
+        }
+      } catch {
+        setCertificates(initialCertificates);
+        localStorage.setItem('certificates', JSON.stringify(initialCertificates));
+      }
     } else {
       setCertificates(initialCertificates);
+      localStorage.setItem('certificates', JSON.stringify(initialCertificates));
     }
 
+    // Load projects with migration logic
     const storedProjects = localStorage.getItem('projects');
-    if (storedProjects) {
-      setProjects(JSON.parse(storedProjects));
-    } else {
+    const projectsVersion = localStorage.getItem('projects_version');
+    const currentVersion = '2.0'; // Version to track project data structure updates
+    
+    // If version doesn't match or no version, update projects
+    if (projectsVersion !== currentVersion) {
       setProjects(initialProjects);
+      localStorage.setItem('projects', JSON.stringify(initialProjects));
+      localStorage.setItem('projects_version', currentVersion);
+    } else if (storedProjects) {
+      try {
+        const parsed = JSON.parse(storedProjects);
+        if (Array.isArray(parsed)) {
+          // Validate project structure
+          const isValid = parsed.every(p => 
+            p && 
+            typeof p.id === 'number' && 
+            typeof p.title === 'string' && 
+            typeof p.githubUrl === 'string'
+          );
+          
+          if (isValid && parsed.length > 0) {
+            setProjects(parsed);
+          } else {
+            // Invalid structure or empty, use initial projects
+            setProjects(initialProjects);
+            localStorage.setItem('projects', JSON.stringify(initialProjects));
+          }
+        } else {
+          setProjects(initialProjects);
+          localStorage.setItem('projects', JSON.stringify(initialProjects));
+        }
+      } catch {
+        // If parsing fails, use initial projects
+        setProjects(initialProjects);
+        localStorage.setItem('projects', JSON.stringify(initialProjects));
+      }
+    } else {
+      // No localStorage data, use initial projects
+      setProjects(initialProjects);
+      localStorage.setItem('projects', JSON.stringify(initialProjects));
+      localStorage.setItem('projects_version', currentVersion);
     }
   }, []);
 
@@ -485,16 +536,22 @@ const Portfolio = () => {
             </button>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
-              <ProjectCard 
-                key={project.id} 
-                project={project} 
-                onDelete={handleDeleteProject}
-                onEdit={handleEditProject}
-              />
-            ))}
-          </div>
+          {projects.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project) => (
+                <ProjectCard 
+                  key={project.id} 
+                  project={project} 
+                  onDelete={handleDeleteProject}
+                  onEdit={handleEditProject}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-text-secondary text-lg mb-4">No projects found. Click "Add New Project" to get started!</p>
+            </div>
+          )}
         </div>
       </section>
 
