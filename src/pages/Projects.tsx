@@ -110,17 +110,19 @@ const Projects = () => {
             <a 
               href="#featured-projects"
               className="neon-button group inline-flex items-center justify-center"
+              aria-label="View All Projects - Scroll to featured projects section"
             >
               View All Projects
-              <Rocket size={20} className="ml-2 inline transition-transform group-hover:translate-x-1" />
+              <Rocket size={20} className="ml-2 inline transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </a>
             <a 
               href="https://github.com/Rokibul-Islam-Robi"
               target="_blank"
               rel="noopener noreferrer"
               className="glass-card px-8 py-3 border border-glass-border/30 text-text-primary hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-all duration-300 flex items-center justify-center group transform-gpu hover:translate-y-[-2px] hover:shadow-lg hover:shadow-neon-blue/20"
+              aria-label="View GitHub Profile - Open Rokibul Islam Robi's GitHub profile"
             >
-              <GithubLogo size={20} className="mr-2 group-hover:rotate-12 transition-transform duration-300" />
+              <GithubLogo size={20} className="mr-2 group-hover:rotate-12 transition-transform duration-300" aria-hidden="true" />
               GitHub Profile
             </a>
           </div>
@@ -140,8 +142,9 @@ const Projects = () => {
             <button
               onClick={() => setIsProjectManagerOpen(true)}
               className="neon-button group"
+              aria-label="Add New Project - Open project manager to add a new project"
             >
-              <Plus size={20} className="mr-2" />
+              <Plus size={20} className="mr-2" aria-hidden="true" />
               Add New Project
             </button>
           </div>
@@ -197,17 +200,18 @@ const Projects = () => {
               Let's collaborate on your next innovative project. I'm always excited to work on new challenges and bring ideas to life.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="neon-button group">
+              <button className="neon-button group" aria-label="Start a Project - Contact to begin a new project">
                 Start a Project
-                <Rocket size={20} className="ml-2 inline transition-transform group-hover:translate-x-1" />
+                <Rocket size={20} className="ml-2 inline transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </button>
               <a 
                 href="https://github.com/Rokibul-Islam-Robi"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass-card px-8 py-3 border border-glass-border/30 text-text-primary hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-all duration-300 flex items-center justify-center group transform-gpu hover:translate-y-[-2px] hover:shadow-lg hover:shadow-neon-blue/20"
+                aria-label="View GitHub Profile - Open Rokibul Islam Robi's GitHub profile"
               >
-                <Code size={20} className="mr-2 group-hover:rotate-12 transition-transform duration-300" />
+                <Code size={20} className="mr-2 group-hover:rotate-12 transition-transform duration-300" aria-hidden="true" />
                 View GitHub
               </a>
             </div>
@@ -257,7 +261,7 @@ const Projects = () => {
               <p className="text-text-secondary text-sm mb-4">
                 Subscribe to get updates about new courses and projects.
               </p>
-              <button className="px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-blue text-white font-medium rounded-lg hover:shadow-glow-purple transition-all duration-300">
+              <button className="px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-blue text-white font-medium rounded-lg hover:shadow-glow-purple transition-all duration-300" aria-label="Subscribe to Newsletter - Get updates about new courses and projects">
                 Subscribe
               </button>
             </div>

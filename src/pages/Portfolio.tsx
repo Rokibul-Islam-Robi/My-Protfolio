@@ -235,8 +235,10 @@ const Portfolio = () => {
                 muted 
                 loop 
                 playsInline
+                playsinline
                 className="w-full h-full object-cover opacity-30"
                 style={{ filter: 'blur(1px)' }}
+                aria-label="Background particle animation video"
               >
                 <source src="/videos/particle-planet.mp4" type="video/mp4" />
                 <source src="/videos/particle-planet.webm" type="video/webm" />
@@ -276,9 +278,9 @@ const Portfolio = () => {
             </div>
             
             <div className="hero-cta flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-12">
-              <button className="neon-button group">
+              <button className="neon-button group" aria-label="Hire Me - Contact for opportunities">
                 Hire Me
-                <ArrowRight size={20} className="ml-2 inline transition-transform group-hover:translate-x-1" />
+                <ArrowRight size={20} className="ml-2 inline transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </button>
             </div>
             </div>
@@ -292,6 +294,8 @@ const Portfolio = () => {
                 width='100%' 
                 height='100%'
                 className="pointer-events-auto"
+                title="3D Particle Planet Animation"
+                aria-label="Interactive 3D particle planet animation"
               />
             </div>
           </div>
@@ -338,10 +342,10 @@ const Portfolio = () => {
               </div>
               
               <div className="flex gap-4">
-                <button className="neon-button">
+                <button className="neon-button" aria-label="Get In Touch - Contact me">
                   Get In Touch
                 </button>
-                <button className="glass-card px-6 py-3 border border-glass-border/30 text-text-primary hover:border-neon-purple/50 transition-all duration-300">
+                <button className="glass-card px-6 py-3 border border-glass-border/30 text-text-primary hover:border-neon-purple/50 transition-all duration-300" aria-label="View Projects - See my portfolio projects">
                   View Projects
                 </button>
               </div>
@@ -458,33 +462,33 @@ const Portfolio = () => {
                 <div className="space-y-6">
                   <h4 className="text-lg font-semibold text-text-primary mb-4 pb-4 border-b border-glass-border/20">Quick Actions</h4>
                   <div className="space-y-3">
-                    <button className="w-full glass-card p-4 text-left border border-glass-border/20 rounded-lg hover:border-glass-border/40 transition-colors duration-200">
+                    <button className="w-full glass-card p-4 text-left border border-glass-border/20 rounded-lg hover:border-glass-border/40 transition-colors duration-200" aria-label="Send Email - Open email client">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className="p-2 rounded-lg border border-glass-border/20">
+                          <div className="p-2 rounded-lg border border-glass-border/20" aria-hidden="true">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-text-secondary">
                               <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                             </svg>
                           </div>
                           <span className="text-text-primary font-medium">Send Email</span>
                         </div>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-text-secondary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-text-secondary" aria-hidden="true">
                           <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 19l8-8-8-8z"/>
                         </svg>
                       </div>
                     </button>
                     
-                    <button className="w-full glass-card p-4 text-left border border-glass-border/20 rounded-lg hover:border-glass-border/40 transition-colors duration-200">
+                    <button className="w-full glass-card p-4 text-left border border-glass-border/20 rounded-lg hover:border-glass-border/40 transition-colors duration-200" aria-label="Schedule Call - Schedule a meeting">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className="p-2 rounded-lg border border-glass-border/20">
+                          <div className="p-2 rounded-lg border border-glass-border/20" aria-hidden="true">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-text-secondary">
                               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                             </svg>
                           </div>
                           <span className="text-text-primary font-medium">Schedule Call</span>
                         </div>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-text-secondary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-text-secondary" aria-hidden="true">
                           <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 19l8-8-8-8z"/>
                         </svg>
                       </div>
@@ -513,8 +517,9 @@ const Portfolio = () => {
                 setIsProjectManagerOpen(true);
               }}
               className="neon-button group mt-8"
+              aria-label="Add New Project - Open project manager"
             >
-              <Plus size={20} className="mr-2" />
+              <Plus size={20} className="mr-2" aria-hidden="true" />
               Add New Project
             </button>
           </div>
@@ -729,6 +734,7 @@ const Portfolio = () => {
                       <button 
                         type="submit" 
                         className="neon-button w-full py-4 text-lg font-semibold transform-gpu transition-all duration-300 hover:scale-105 hover:shadow-glow-blue"
+                        aria-label="Send Message - Submit contact form"
                       >
                         Send Message
                       </button>
@@ -783,7 +789,7 @@ const Portfolio = () => {
               <p className="text-text-secondary text-sm mb-4">
                 Subscribe to get updates about new courses and projects.
               </p>
-              <button className="px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-blue text-white font-medium rounded-lg hover:shadow-glow-purple transition-all duration-300">
+              <button className="px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-blue text-white font-medium rounded-lg hover:shadow-glow-purple transition-all duration-300" aria-label="Subscribe to Newsletter - Get updates about new courses and projects">
                 Subscribe
               </button>
             </div>

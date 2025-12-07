@@ -104,6 +104,7 @@ const ContactCard = ({ icon: Icon, title, content, href, color }: ContactCardPro
         rel={href.startsWith('mailto:') ? '' : 'noopener noreferrer'}
         className="block h-full w-full"
         style={{ display: 'block', height: '100%', width: '100%' }}
+        aria-label={`${title} - ${content}`}
       >
         {cardContent}
       </a>

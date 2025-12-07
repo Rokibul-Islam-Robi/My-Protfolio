@@ -140,6 +140,7 @@ const ProjectCard = ({ project, onDelete, onEdit, variant }: ProjectCardProps) =
                 rel="noopener noreferrer"
                 className={`relative py-3.5 px-6 text-sm font-bold text-white border-2 transition-all duration-300 flex items-center justify-center gap-2.5 group shadow-xl transform-gpu hover:translate-y-[-3px] hover:scale-[1.03] overflow-hidden rounded-lg z-10 ${project.liveUrl ? 'flex-1' : 'w-full'}`}
                 title={`View ${project.title} on GitHub`}
+                aria-label={`View ${project.title} source code on GitHub`}
                 style={{
                   background: 'linear-gradient(135deg, #1c2128 0%, #2d333b 50%, #22272e 100%)',
                   borderColor: '#539bf5',
@@ -171,8 +172,9 @@ const ProjectCard = ({ project, onDelete, onEdit, variant }: ProjectCardProps) =
                 rel="noopener noreferrer"
                 className="flex-1 glass-card py-2.5 text-sm font-medium text-text-primary hover:text-neon-purple border border-glass-border/30 hover:border-neon-purple/50 hover:bg-neon-purple/10 transition-all duration-300 flex items-center justify-center gap-2 group transform-gpu hover:translate-y-[-2px] hover:shadow-lg hover:shadow-neon-purple/20"
                 title="View Live Demo"
+                aria-label={`View ${project.title} live demo`}
               >
-                <Link size={16} className="group-hover:rotate-45 transition-transform duration-300" />
+                <Link size={16} className="group-hover:rotate-45 transition-transform duration-300" aria-hidden="true" />
                 Live Demo
               </a>
             )}
@@ -181,8 +183,9 @@ const ProjectCard = ({ project, onDelete, onEdit, variant }: ProjectCardProps) =
                 onClick={() => onEdit(project)}
                 className="glass-card p-3 text-sm font-medium text-text-primary hover:text-neon-blue border border-glass-border/30 hover:border-neon-blue/50 transition-all duration-300 flex items-center justify-center gap-2 group transform-gpu hover:translate-y-[-2px] hover:shadow-lg hover:shadow-neon-blue/20"
                 title="Edit Project"
+                aria-label={`Edit ${project.title} project`}
               >
-                <PencilSimple size={16} />
+                <PencilSimple size={16} aria-hidden="true" />
               </button>
             )}
             {onDelete && (
@@ -190,8 +193,9 @@ const ProjectCard = ({ project, onDelete, onEdit, variant }: ProjectCardProps) =
                 onClick={() => onDelete(project.id)}
                 className="glass-card p-3 text-sm font-medium text-text-primary hover:text-red-500 border border-glass-border/30 hover:border-red-500/50 transition-all duration-300 flex items-center justify-center gap-2 group transform-gpu hover:translate-y-[-2px] hover:shadow-lg hover:shadow-red-500/20"
                 title="Delete Project"
+                aria-label={`Delete ${project.title} project`}
               >
-                <Trash size={16} />
+                <Trash size={16} aria-hidden="true" />
               </button>
             )}
           </div>
