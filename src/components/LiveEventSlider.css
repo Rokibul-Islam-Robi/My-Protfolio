@@ -18,6 +18,10 @@
   backdrop-filter: blur(10px);
 }
 
+.live-event-card img {
+  object-position: 50% 20%;
+}
+
 .live-event-card:hover {
   transform: translateY(-10px) scale(1.02);
   border-color: rgba(0, 243, 255, 0.3);
