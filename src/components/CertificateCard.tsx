@@ -38,24 +38,42 @@ const CertificateCard = ({ certificate, onDelete }: CertificateCardProps) => {
       {/* Certificate Image with 3D Effect */}
       <div className="relative mb-4 transform-gpu transition-transform duration-500 group-hover:rotate-y-6 group-hover:scale-105">
         {!imageError && imageUrl && !imageUrl.includes('placeholder') ? (
-          <div className="w-full h-[200px] bg-gradient-to-br from-background-secondary/50 to-background-tertiary/50 rounded-lg p-2 border border-glass-border/30 flex items-center justify-center overflow-hidden">
+          <div className="w-full h-[220px] bg-gradient-to-br from-background-secondary/50 to-background-tertiary/50 rounded-lg p-2 border border-glass-border/30 flex items-center justify-center overflow-hidden">
             <img 
               src={imageUrl} 
               alt={certificate.name}
-              className="w-full h-full object-contain rounded-lg transition-all duration-500 group-hover:scale-110"
+              className="w-full h-full object-contain rounded-lg transition-all duration-700 group-hover:scale-110"
               onError={handleImageError}
               loading="lazy"
             />
           </div>
         ) : (
-          <div className="w-full h-[200px] bg-gradient-to-br from-neon-blue/20 via-neon-purple/20 to-neon-cyan/20 rounded-lg flex items-center justify-center border-2 border-dashed border-neon-blue/30 group-hover:border-neon-purple/50 transition-all duration-500">
-            <div className="text-center p-4">
-              <div className="glass-card p-3 rounded-full inline-block mb-2 transform-gpu transition-transform duration-300 group-hover:rotate-12">
-                <Medal size={32} className="text-neon-purple" />
-              </div>
-              <p className="text-text-primary text-xs font-semibold mb-1 truncate max-w-[150px] mx-auto">{certificate.name}</p>
-              <p className="text-text-muted text-[10px]">Certificate Preview</p>
+          <div className="w-full h-[220px] relative overflow-hidden bg-background-secondary/30 rounded-lg border border-glass-border/20 group-hover:border-neon-purple/40 transition-all duration-500">
+            {/* Artistic Abstract Background */}
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(147,51,234,0.3),transparent_70%)]"></div>
+              <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(45deg,transparent_25%,rgba(59,130,246,0.1)_50%,transparent_75%)]"></div>
             </div>
+            
+            <div className="relative h-full flex flex-col items-center justify-center text-center p-6">
+              <div className="w-20 h-20 mb-4 relative">
+                <div className="absolute inset-0 bg-neon-purple/20 rounded-full blur-xl animate-pulse"></div>
+                <div className="relative glass-card w-full h-full rounded-2xl flex items-center justify-center border border-neon-purple/30 group-hover:rotate-12 transition-transform duration-500">
+                  <Medal size={40} className="text-neon-purple drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]" />
+                </div>
+              </div>
+              <div className="space-y-1 max-w-[80%]">
+                <p className="text-text-primary text-sm font-bold tracking-tight line-clamp-1">{certificate.name}</p>
+                <p className="text-neon-cyan text-[10px] font-medium uppercase tracking-widest">{certificate.issuer}</p>
+              </div>
+              <div className="mt-4 px-3 py-1 rounded-full bg-background/60 border border-glass-border/20 backdrop-blur-md">
+                <span className="text-[10px] text-text-muted font-medium">Digital Credential</span>
+              </div>
+            </div>
+            
+            {/* Cyber Corner Accents */}
+            <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-neon-purple/40"></div>
+            <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-neon-blue/40"></div>
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg pointer-events-none"></div>
