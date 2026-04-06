@@ -25,6 +25,9 @@ import ProjectManager from '../components/ProjectManager';
 import ProjectCard from '../components/ProjectCard';
 import ContactCard from '../components/ContactCard';
 import ContactAnimation from '../components/ContactAnimation';
+import LiveEventSlider from '../components/LiveEventSlider';
+import { liveEvents } from '../data/liveEvents';
+import { CaretRight } from 'phosphor-react';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -625,6 +628,38 @@ const Portfolio = () => {
               View All Certificates
               <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
+          </div>
+
+          {/* Live Events Section */}
+          <div className="mt-24 pt-16 border-t border-glass-border/10">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-blue/10 border border-neon-blue/20 text-neon-blue text-sm font-medium mb-4">
+                <Rocket size={16} />
+                <span>Memorable Moments</span>
+              </div>
+              <h3 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">Live Events & Highlights</h3>
+              <p className="text-text-secondary max-w-xl mx-auto">
+                Capturing the essence of innovation, learning, and collaboration from recent events.
+              </p>
+            </div>
+            
+            <LiveEventSlider />
+            
+            <div className="flex justify-center mt-8">
+              <div className="flex items-center gap-4 text-text-muted text-sm">
+                <div className="flex -space-x-3">
+                  {liveEvents.slice(0, 4).map((event, i) => (
+                    <div key={i} className="w-10 h-10 rounded-full border-2 border-background overflow-hidden">
+                      <img src={event.image} alt="" className="w-full h-full object-cover" />
+                    </div>
+                  ))}
+                  <div className="w-10 h-10 rounded-full border-2 border-background bg-glass-card flex items-center justify-center text-[10px] font-bold">
+                    +{liveEvents.length}
+                  </div>
+                </div>
+                <span>Experience {liveEvents.length}+ Tech Events</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
