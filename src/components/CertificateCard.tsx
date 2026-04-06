@@ -1,4 +1,4 @@
-import { LinkedinLogo, Calendar, Medal, Link, Trash } from 'phosphor-react';
+import { LinkedinLogo, Calendar, Medal, Link, Trash, CaretDown, CaretUp } from 'phosphor-react';
 import { Certificate } from '../data/certificates';
 import { useState } from 'react';
 
@@ -21,109 +21,123 @@ const transformGoogleDriveUrl = (url: string) => {
 
 const CertificateCard = ({ certificate, onDelete }: CertificateCardProps) => {
   const [imageError, setImageError] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const imageUrl = transformGoogleDriveUrl(certificate.image);
 
   const handleImageError = () => {
     setImageError(true);
   };
 
+  const truncateDescription = (text: string, limit: number = 150) => {
+    if (text.length <= limit) return text;
+    return text.slice(0, limit) + '...';
+  };
+
   return (
-    <div className="certification-card glass-card p-6 hover:shadow-glow-purple transition-all duration-500 group transform-gpu perspective-1000">
+    <div className="certification-card glass-card p-6 hover:shadow-glow-purple transition-all duration-500 group transform-gpu perspective-1000 flex flex-col h-full">
       {/* Certificate Image with 3D Effect */}
-      <div className="relative mb-4 transform-gpu transition-transform duration-500 group-hover:rotate-y-12 group-hover:scale-105">
+      <div className="relative mb-4 transform-gpu transition-transform duration-500 group-hover:rotate-y-6 group-hover:scale-105">
         {!imageError && imageUrl && !imageUrl.includes('placeholder') ? (
-          <div className="w-full min-h-[300px] bg-gradient-to-br from-background-secondary/50 to-background-tertiary/50 rounded-lg p-4 border border-glass-border/30 flex items-center justify-center overflow-hidden">
+          <div className="w-full h-[200px] bg-gradient-to-br from-background-secondary/50 to-background-tertiary/50 rounded-lg p-2 border border-glass-border/30 flex items-center justify-center overflow-hidden">
             <img 
               src={imageUrl} 
               alt={certificate.name}
-              className="w-full h-auto max-h-[300px] object-contain rounded-lg transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-neon-purple/30 group-hover:scale-110"
+              className="w-full h-full object-contain rounded-lg transition-all duration-500 group-hover:scale-110"
               onError={handleImageError}
               loading="lazy"
             />
           </div>
         ) : (
-          <div className="w-full min-h-[300px] bg-gradient-to-br from-neon-blue/20 via-neon-purple/20 to-neon-cyan/20 rounded-lg flex items-center justify-center border-2 border-dashed border-neon-blue/30 group-hover:border-neon-purple/50 transition-all duration-500">
-            <div className="text-center p-8">
-              <div className="glass-card p-4 rounded-full inline-block mb-4 transform-gpu transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
-                <Medal size={48} className="text-neon-purple" />
+          <div className="w-full h-[200px] bg-gradient-to-br from-neon-blue/20 via-neon-purple/20 to-neon-cyan/20 rounded-lg flex items-center justify-center border-2 border-dashed border-neon-blue/30 group-hover:border-neon-purple/50 transition-all duration-500">
+            <div className="text-center p-4">
+              <div className="glass-card p-3 rounded-full inline-block mb-2 transform-gpu transition-transform duration-300 group-hover:rotate-12">
+                <Medal size={32} className="text-neon-purple" />
               </div>
-              <p className="text-text-primary font-semibold mb-1">{certificate.name}</p>
-              <p className="text-text-secondary text-sm mb-2">{certificate.issuer}</p>
-              <p className="text-text-muted text-xs">Certificate Image</p>
+              <p className="text-text-primary text-xs font-semibold mb-1 truncate max-w-[150px] mx-auto">{certificate.name}</p>
+              <p className="text-text-muted text-[10px]">Certificate Preview</p>
             </div>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg pointer-events-none"></div>
-        
-        {/* 3D Floating Elements */}
-        <div className="absolute -top-2 -right-2 w-4 h-4 bg-neon-purple/20 rounded-full animate-pulse group-hover:animate-bounce"></div>
-        <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-neon-cyan/30 rounded-full animate-pulse group-hover:animate-ping"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg pointer-events-none"></div>
       </div>
 
-      {/* Certificate Info with 3D Transform */}
-      <div className="flex items-center mb-4 transform-gpu transition-transform duration-300 group-hover:translate-z-4">
-        <div className="glass-card p-3 rounded-lg mr-4 transform-gpu transition-all duration-300 group-hover:rotate-12 group-hover:scale-110">
-          <Medal size={32} className="text-neon-purple transition-colors duration-300 group-hover:text-neon-cyan" />
+      {/* Certificate Info */}
+      <div className="flex items-start mb-4">
+        <div className="glass-card p-2 rounded-lg mr-3 mt-1 shrink-0">
+          <Medal size={24} className="text-neon-purple transition-colors duration-300 group-hover:text-neon-cyan" />
         </div>
-        <div className="transform-gpu transition-transform duration-300 group-hover:translate-x-2">
-          <h3 className="text-xl font-semibold text-text-primary transition-colors duration-300 group-hover:text-neon-blue">{certificate.name}</h3>
-          <p className="text-neon-purple font-medium text-sm transition-colors duration-300 group-hover:text-neon-cyan">{certificate.issuer}</p>
+        <div>
+          <h3 className="text-lg font-bold text-text-primary leading-tight transition-colors duration-300 group-hover:text-neon-blue">{certificate.name}</h3>
+          <p className="text-neon-purple font-medium text-xs mt-1 transition-colors duration-300 group-hover:text-neon-cyan">{certificate.issuer}</p>
         </div>
       </div>
       
-      {/* Description with 3D Text Effect */}
-      <div className="mb-4 transform-gpu transition-transform duration-300 group-hover:translate-z-2">
-        <p className="text-text-secondary text-sm mb-2 leading-relaxed group-hover:text-text-primary transition-colors duration-300">{certificate.description}</p>
-        
-        {/* Date and Credential with 3D Hover */}
-        <div className="flex items-center justify-between text-sm transform-gpu transition-transform duration-300 group-hover:scale-105">
-          <div className="flex items-center gap-1 transform-gpu transition-transform duration-300 group-hover:translate-x-1">
-            <Calendar size={16} className="text-text-secondary transition-colors duration-300 group-hover:text-neon-cyan" />
-            <span className="text-text-secondary transition-colors duration-300 group-hover:text-text-primary">Issued:</span>
-            <span className="text-neon-cyan font-medium transition-colors duration-300 group-hover:text-neon-blue">{certificate.date}</span>
-          </div>
-          <div className="flex items-center gap-1 transform-gpu transition-transform duration-300 group-hover:translate-x-1">
-            <Medal size={16} className="text-text-secondary transition-colors duration-300 group-hover:text-neon-purple" />
-            <span className="text-text-secondary transition-colors duration-300 group-hover:text-text-primary">ID:</span>
-            <span className="text-neon-blue font-mono transition-colors duration-300 group-hover:text-neon-cyan">{certificate.credential}</span>
-          </div>
-        </div>
-      </div>
-      
-      {/* Status Tags with 3D Animation */}
-      <div className="flex gap-2 mb-4 transform-gpu transition-transform duration-300 group-hover:scale-105">
-        <span className="px-3 py-1 bg-neon-purple/10 text-neon-purple text-xs rounded-full border border-neon-purple/20 transition-all duration-300 group-hover:bg-neon-purple/20 group-hover:border-neon-purple/40 group-hover:scale-110">
-          Verified
-        </span>
-        <span className="px-3 py-1 bg-neon-blue/10 text-neon-blue text-xs rounded-full border border-neon-blue/20 transition-all duration-300 group-hover:bg-neon-blue/20 group-hover:border-neon-blue/40 group-hover:scale-110">
-          Active
-        </span>
-        <span className="px-3 py-1 bg-neon-cyan/10 text-neon-cyan text-xs rounded-full border border-neon-cyan/20 transition-all duration-300 group-hover:bg-neon-cyan/20 group-hover:border-neon-cyan/40 group-hover:scale-110">
-          {certificate.category === 'certificate' ? 'Certificate' : 'Workshop'}
-        </span>
+      {/* Description with Read More */}
+      <div className="mb-4 flex-grow">
+        <p className="text-text-secondary text-sm leading-relaxed transition-colors duration-300">
+          {isExpanded ? certificate.description : truncateDescription(certificate.description)}
+          {certificate.description.length > 150 && (
+            <button 
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="ml-2 text-neon-blue hover:text-neon-cyan font-medium text-xs inline-flex items-center gap-1 transition-colors"
+            >
+              {isExpanded ? (
+                <>Read Less <CaretUp size={12} /></>
+              ) : (
+                <>Read More <CaretDown size={12} /></>
+              )}
+            </button>
+          )}
+        </p>
       </div>
 
-      <div className="flex gap-2">
-        {/* LinkedIn Button with 3D Effect */}
-        <a 
-          href={certificate.linkedinUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full glass-card py-3 text-sm font-medium text-text-primary hover:text-neon-blue border border-glass-border/30 hover:border-neon-blue/50 transition-all duration-300 flex items-center justify-center gap-2 group transform-gpu hover:translate-y-[-2px] hover:shadow-lg hover:shadow-neon-blue/20"
-        >
-          <LinkedinLogo size={16} className="transition-transform duration-300 group-hover:scale-110" />
-          View on LinkedIn
-          <Link size={16} className="opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1" />
-        </a>
-        <button
-          onClick={() => onDelete(certificate.id)}
-          className="glass-card p-3 text-sm font-medium text-text-primary hover:text-red-500 border border-glass-border/30 hover:border-red-500/50 transition-all duration-300 flex items-center justify-center gap-2 group transform-gpu hover:translate-y-[-2px] hover:shadow-lg hover:shadow-red-500/20"
-        >
-          <Trash size={16} />
-        </button>
+      <div className="mt-auto space-y-4">
+        {/* Date and Credential */}
+        <div className="flex items-center justify-between text-[11px] border-t border-glass-border/10 pt-4">
+          <div className="flex items-center gap-1">
+            <Calendar size={14} className="text-text-secondary" />
+            <span className="text-text-secondary">Issued:</span>
+            <span className="text-neon-cyan font-medium">{certificate.date}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Medal size={14} className="text-text-secondary" />
+            <span className="text-text-secondary">ID:</span>
+            <span className="text-neon-blue font-mono">{certificate.credential}</span>
+          </div>
+        </div>
+        
+        {/* Status Tags */}
+        <div className="flex flex-wrap gap-2">
+          <span className="px-2 py-0.5 bg-neon-purple/10 text-neon-purple text-[10px] rounded-full border border-neon-purple/20">
+            Verified
+          </span>
+          <span className="px-2 py-0.5 bg-neon-cyan/10 text-neon-cyan text-[10px] rounded-full border border-neon-cyan/20">
+            {certificate.category === 'certificate' ? 'Certificate' : 'Workshop'}
+          </span>
+        </div>
+
+        <div className="flex gap-2">
+          <a 
+            href={certificate.linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-grow glass-card py-2.5 text-xs font-bold text-text-primary hover:text-neon-blue border border-glass-border/30 hover:border-neon-blue/50 transition-all duration-300 flex items-center justify-center gap-2 group transform-gpu hover:translate-y-[-2px]"
+          >
+            <LinkedinLogo size={14} />
+            View on LinkedIn
+            <Link size={14} className="opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1" />
+          </a>
+          <button
+            onClick={() => onDelete(certificate.id)}
+            className="glass-card px-3 py-2.5 text-text-primary hover:text-red-500 border border-glass-border/30 hover:border-red-500/50 transition-all duration-300 transform-gpu hover:translate-y-[-2px]"
+            title="Delete Certificate"
+          >
+            <Trash size={14} />
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default CertificateCard; 
+export default CertificateCard;
