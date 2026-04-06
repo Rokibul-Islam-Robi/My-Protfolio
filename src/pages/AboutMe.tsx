@@ -255,7 +255,7 @@ const AboutMe = () => {
                 <div className="glass-card p-8 rounded-full">
                   <img 
                     src="/lovable-uploads/967a4f32-a2c4-4362-a825-f837f03c0db1.png" 
-                    alt="TASNIA" 
+                    alt="Rokibul Islam Robi" 
                     className="w-full h-full object-cover rounded-full hover:scale-105 transition-transform duration-500"
                   />
                 </div>
