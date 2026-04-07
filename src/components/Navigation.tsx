@@ -2,14 +2,17 @@ import { useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { List, X, Sun, Moon, DownloadSimple } from 'phosphor-react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTheme } from 'next-themes';
 import { cvLinks } from '../data/cv';
 import CVPreview from './CVPreview';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const { theme, setTheme } = useTheme();
   const location = useLocation();
+
+  const isDarkMode = theme === 'dark';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,10 +22,6 @@ const Navigation = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-
-
-
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -43,9 +42,7 @@ const Navigation = () => {
   };
 
   const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    // Add theme toggle logic here
-    document.documentElement.classList.toggle('light-mode');
+    setTheme(isDarkMode ? 'light' : 'dark');
   };
 
   const navItems = [
