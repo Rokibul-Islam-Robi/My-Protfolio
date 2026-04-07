@@ -28,6 +28,7 @@ import ContactAnimation from '../components/ContactAnimation';
 import LiveEventSlider from '../components/LiveEventSlider';
 import { liveEvents } from '../data/liveEvents';
 import { CaretRight } from 'phosphor-react';
+import { cvLinks } from '../data/cv';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -282,10 +283,16 @@ const Portfolio = () => {
             </div>
             
             <div className="hero-cta flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-12">
-              <button className="neon-button group" aria-label="Hire Me - Contact for opportunities">
+              <a 
+                href={cvLinks.cv} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="neon-button group inline-flex items-center justify-center" 
+                aria-label="Hire Me - View my CV"
+              >
                 Hire Me
-                <ArrowRight size={20} className="ml-2 inline transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              </button>
+                <ArrowRight size={20} className="ml-2 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              </a>
             </div>
             </div>
           </div>
